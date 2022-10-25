@@ -1,7 +1,7 @@
 ﻿
 namespace CKK.Logic.Models
 {
-    internal class StoreItem
+    public class StoreItem
     {
         private Product _product;
         private int _quantity;
