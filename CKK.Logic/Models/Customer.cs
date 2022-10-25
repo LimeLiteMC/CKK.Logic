@@ -4,8 +4,8 @@ namespace CKK.Logic.Models
     internal class Customer
     {
         private int Id;
-        private string Name = "";
-        private string Address = "";
+        private string Name;
+        private string Address;
         public int GetID()
         {
             return Id;

@@ -4,7 +4,7 @@ namespace CKK.Logic.Models
     internal class ShoppingCartItem
     {
         private Product _product;
-        private int _quantity = 0;
+        private int _quantity;
 
         public ShoppingCartItem(Product product, int quantity)
         {

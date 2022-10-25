@@ -3,9 +3,9 @@ namespace CKK.Logic.Models
 {
     internal class Product
     {
-        private int Id = 0;
-        private string Name = "";
-        private decimal Price = 0.00m;
+        private int Id;
+        private string Name;
+        private decimal Price;
         public int GetId()
         {
             return Id;
