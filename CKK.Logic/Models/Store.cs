@@ -47,10 +47,6 @@ namespace CKK.Logic.Models
             {
                 Product3 = prod;
             }
-            else
-            {
-                Console.WriteLine("Shelves are full, could not add.");
-            }
         }
         public void RemoveStoreItem(int productNum)
         {
@@ -68,15 +64,15 @@ namespace CKK.Logic.Models
                     break;
             }
         }
-        public Product GetSoreItem(int productNum)
+        public Product GetStoreItem(int productNum)
         {
             switch (productNum)
             {
-                case 1:
+                case 0:
                     return Product1;
-                case 2:
+                case 1:
                     return Product2;
-                case 3:
+                case 2:
                     return Product3;
                 default:
                     return null;
