@@ -27,19 +27,27 @@ namespace CKK.Logic.Models
         {
             if (_product1.GetProduct() == null || _product1.GetProduct() == prod)
             {
-                _product1.SetProduct(prod);
                 if (quantity >= 0)
                 {
+                    _product1.SetProduct(prod);
                     _product1.SetQuantity(_product1.GetQuantity() + quantity);
+                }
+                else
+                {
+                    return null;
                 }
                 return _product1;
             }
             else if (_product2.GetProduct() == null || _product2.GetProduct() == prod)
             {
-                _product2.SetProduct(prod);
                 if (quantity >= 0)
                 {
+                    _product2.SetProduct(prod);
                     _product2.SetQuantity(_product2.GetQuantity() + quantity);
+                }
+                else
+                {
+                    return null;
                 }
                 return _product2;
             }
@@ -48,7 +56,12 @@ namespace CKK.Logic.Models
                 _product3.SetProduct(prod);
                 if (quantity >= 0)
                 {
+                    _product3.SetProduct(prod);
                     _product3.SetQuantity(_product3.GetQuantity() + quantity);
+                }
+                else
+                {
+                    return null;
                 }
                 return _product3;
             }
