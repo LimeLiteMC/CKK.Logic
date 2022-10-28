@@ -85,7 +85,7 @@ namespace CKK.Logic.Models
             decimal product2;
             decimal product3;
             decimal total;
-            if (_product1 == null)
+            if (_product1 == null || _product1.GetProduct().GetPrice() < 0m)
             {
                 product1 = 0m;
             }
@@ -93,7 +93,7 @@ namespace CKK.Logic.Models
             {
                 product1 = _product1.GetTotal();
             }
-            if (_product2 == null)
+            if (_product2 == null || _product2.GetProduct().GetPrice() < 0m)
             {
                 product2 = 0m;
             }
@@ -101,7 +101,7 @@ namespace CKK.Logic.Models
             {
                 product2 = _product2.GetTotal();
             }
-            if (_product3 == null)
+            if (_product3 == null || _product3.GetProduct().GetPrice() < 0m)
             {
                 product3 = 0m;
             }
@@ -114,7 +114,22 @@ namespace CKK.Logic.Models
         }
         public ShoppingCartItem GetProduct(int productNum)
         {
-            
+            if (_product1.GetProduct().GetId() == productNum)
+            {
+                return _product1;
+            }
+            else if (_product2.GetProduct().GetId() == productNum)
+            {
+                return _product2;
+            }
+            else if (_product3.GetProduct().GetId() == productNum)
+            {
+                return _product3;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
