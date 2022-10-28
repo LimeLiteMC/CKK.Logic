@@ -78,7 +78,7 @@ namespace CKK.Logic.Models
 
         public ShoppingCartItem RemoveProduct(Product prod, int quantity)
         {
-            if (prod == _product1.GetProduct())
+            if (prod.GetId() == _product1.GetProduct().GetId())
             {
                 _product1.SetQuantity(_product1.GetQuantity() - quantity);
                 if (_product1.GetQuantity() == 0) 
@@ -87,7 +87,7 @@ namespace CKK.Logic.Models
                 }
                 return _product1;
             }
-            else if (prod == _product2.GetProduct())
+            else if (prod.GetId() == _product2.GetProduct().GetId())
             {
                 _product2.SetQuantity(_product2.GetQuantity() - quantity);
                 if (_product2.GetQuantity() == 0)
@@ -96,7 +96,7 @@ namespace CKK.Logic.Models
                 }
                     return _product2;
             }
-            else if (prod == _product3.GetProduct())
+            else if (prod.GetId() == _product3.GetProduct().GetId())
             {
                 _product3.SetQuantity(_product3.GetQuantity() - quantity);
                 if (_product3.GetQuantity() == 0)
@@ -132,25 +132,25 @@ namespace CKK.Logic.Models
             decimal product2;
             decimal product3;
             decimal total;
-            if (_product1 == null || _product1.GetProduct().GetPrice() < 0m)
+            if (_product1 == null || _product1.GetProduct().GetPrice() < 0)
             {
-                product1 = 0m;
+                product1 = 0;
             }
             else
             {
                 product1 = _product1.GetTotal();
             }
-            if (_product2 == null || _product2.GetProduct().GetPrice() < 0m)
+            if (_product2 == null || _product2.GetProduct().GetPrice() < 0)
             {
-                product2 = 0m;
+                product2 = 0;
             }
             else
             {
                 product2 = _product2.GetTotal();
             }
-            if (_product3 == null || _product3.GetProduct().GetPrice() < 0m)
+            if (_product3 == null || _product3.GetProduct().GetPrice() < 0)
             {
-                product3 = 0m;
+                product3 = 0;
             }
             else
             {

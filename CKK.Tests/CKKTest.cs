@@ -46,9 +46,9 @@ namespace CKK.Tests
             Nike.SetName("Nike");
             Nike.SetPrice(15.30m);
 
-            string expected = null;
-            decimal expected2 = 0;
-            int expected3 = 0;
+            string expected = "Nike";
+            int expected2 = 3;
+            int expected3 = 123;
 
             Customer Karen = new Customer();
             Karen.SetAddress("123 Fake St.");
@@ -58,11 +58,11 @@ namespace CKK.Tests
             ShoppingCart cart = new ShoppingCart(Karen);
             cart.AddProduct(Nike, 5);
             //Act
-            cart.RemoveProduct(Nike, 5);
+            cart.RemoveProduct(Nike, 2);
 
             //Assert
             string actual = cart.GetProductById(Nike.GetId()).GetProduct().GetName();
-            decimal actual2 = cart.GetProductById(Nike.GetId()).GetProduct().GetPrice();
+            int actual2 = cart.GetProductById(Nike.GetId()).GetQuantity();
             int actual3 = cart.GetProductById(Nike.GetId()).GetProduct().GetId();
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(expected2, actual2);
@@ -86,8 +86,8 @@ namespace CKK.Tests
             TimBuk2.SetId(789);
             TimBuk2.SetName("Astro x TimBuk2");
             TimBuk2.SetPrice(200.20m);
-
-            decimal expected = 0;
+            //76.5 + 1999.98 + 600.60
+            decimal expected = 2677.08m ;
 
             Customer Karen = new Customer();
             Karen.SetAddress("123 Fake St.");
@@ -103,7 +103,7 @@ namespace CKK.Tests
             cart.GetTotal();
 
             //Assert
-            decimal actual = cart.GetProductById(Nike.GetId()).GetProduct().GetPrice();
+            decimal actual = cart.GetTotal();
             Assert.AreEqual(expected, actual);
 
             //Create a unit test that checks to see if the total is accurate.
