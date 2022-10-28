@@ -1,31 +1,42 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CKK.Logic.Models;
+using Xunit;
 namespace CKK.Tests
 {
-    [TestClass]
     public class CKKTest
     {
-        [TestMethod]
-        public void TestMethod1()
+        [Fact]
+        public void Test_AddsAProduct()
         {
-            try
-            {
-                Product tortilla = new Product();
-                tortilla.SetName("Tortilla");
-                tortilla.SetPrice(1.57m);
-                tortilla.SetId(543);
-                Customer Jared = new Customer();
-                ShoppingCart cart = new ShoppingCart(Jared);
-                Jared.SetAddress("123 Fake St.");
-                Jared.SetId(123);
-                Jared.SetName("Jared");
-                cart.AddProduct(tortilla, 5);
+            //Make sure the unit test accurately tests the product and if it was added correctly.
+            Product Nike = new Product();
+            Nike.SetId(123);
+            Nike.SetName("Nike");
+            Nike.SetPrice(15.30m);
 
-            }
-            catch
-            {
+            Customer Karen = new Customer();
+            Karen.SetAddress("123 Fake St.");
+            Karen.SetName("Karen");
+            Karen.SetId(123);
 
-            }
+            ShoppingCart cart = new ShoppingCart(Karen);
+            //Arrage
+            ShoppingCartItem expected = Nike;
+            //Act
+            cart.AddProduct(Nike, 5);
+            ShoppingCartItem actual = cart.GetProductById(Nike.GetId());
+            //Assert
+            Assert.True(expected == actual);
+        }
+        [Fact]
+        public void Test_RemovesAProduct()
+        {
+            //Make sure the unit test accurately removes the product.
+
+        }
+        [Fact]
+        public void Test_GetsTheTotal()
+        {
+            //Create a unit test that checks to see if the total is accurate.
         }
     }
 }

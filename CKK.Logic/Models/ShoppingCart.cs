@@ -25,39 +25,85 @@ namespace CKK.Logic.Models
         {
             if (prod == _product1.GetProduct())
             {
+                _product1.SetQuantity(_product1.GetQuantity() + quantity);
                 return _product1;  
             }
             else if (prod == _product2.GetProduct())
             {
-                    return _product2;   
+                _product2.SetQuantity(_product2.GetQuantity() + quantity);
+                return _product2;
             }
             else if (prod == _product3.GetProduct())
             {
-                    return _product3;
+                _product3.SetQuantity(_product3.GetQuantity() + quantity);
+                return _product3;
             }
             return null;
             
         }
         public ShoppingCartItem AddProduct(Product prod)
         {
+            if (_product1 == null)
+            {
+                _product1.SetProduct(prod);
+                return _product1;
+            }
+            else if (_product2 == null)
+            {
+                _product2.SetProduct(prod);
+                return _product2;
+            }
+            else if (_product3 == null)
+            {
+                _product3.SetProduct(prod);
+            }
             return null;
         }
         public ShoppingCartItem RemoveProduct(Product prod, int quantity)
         {
             if (prod == _product1.GetProduct())
             {
-                    _product1 = null;
-                    return _product1;
+                _product1.SetQuantity(_product1.GetQuantity() - quantity);
+                if (_product1.GetQuantity() == 0) 
+                {
+                    _product1.SetProduct(null);
+                }
+                return _product1;
             }
             else if (prod == _product2.GetProduct())
             {
-                    _product2 = null;
+                _product2.SetQuantity(_product2.GetQuantity() - quantity);
+                if (_product2.GetQuantity() == 0)
+                {
+                    _product2.SetProduct(null);
+                }
                     return _product2;
             }
             else if (prod == _product3.GetProduct())
             {
-                    _product3 = null;
+                _product3.SetQuantity(_product3.GetQuantity() - quantity);
+                if (_product3.GetQuantity() == 0)
+                {
+                    _product3.SetProduct(null);
+                }
+                _product3 = null;
                     return _product3;
+            }
+            return null;
+        }
+        public ShoppingCartItem GetProductById(int id)
+        {
+            if (_product1.GetProduct().GetId() == id)
+            {
+                return _product1;
+            }
+            else if (_product2.GetProduct().GetId() == id)
+            {
+                return _product2;
+            }
+            else if (_product3.GetProduct().GetId() == id)
+            {
+                return _product3;
             }
             return null;
         }
