@@ -25,24 +25,15 @@ namespace CKK.Logic.Models
         {
             if (prod == _product1.GetProduct())
             {
-                for (int i = 0; i <= quantity; i++)
-                {
-                    return _product1;
-                }
+                return _product1;  
             }
             else if (prod == _product2.GetProduct())
             {
-                for (int i = 0; i <= quantity; i++)
-                {
-                    return _product2;
-                }
+                    return _product2;   
             }
             else if (prod == _product3.GetProduct())
             {
-                for (int i = 0; i <= quantity; i++)
-                {
                     return _product3;
-                }
             }
             return null;
             
