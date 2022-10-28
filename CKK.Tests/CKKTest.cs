@@ -22,6 +22,10 @@ namespace CKK.Tests
                 cart.AddProduct(tortilla, 5);
 
             }
+            catch
+            {
+
+            }
         }
     }
 }
