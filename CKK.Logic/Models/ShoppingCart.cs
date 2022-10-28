@@ -46,27 +46,18 @@ namespace CKK.Logic.Models
         {
             if (prod == _product1.GetProduct())
             {
-                for (int i = 0; i <= quantity; i++)
-                {
                     _product1 = null;
                     return _product1;
-                }
             }
             else if (prod == _product2.GetProduct())
             {
-                for (int i = 0; i <= quantity; i++)
-                {
                     _product2 = null;
                     return _product2;
-                }
             }
             else if (prod == _product3.GetProduct())
             {
-                for (int i = 0; i <= quantity; i++)
-                {
                     _product3 = null;
                     return _product3;
-                }
             }
             return null;
         }
