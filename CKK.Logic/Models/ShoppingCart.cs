@@ -25,45 +25,42 @@ namespace CKK.Logic.Models
 
         public ShoppingCartItem AddProduct(Product prod, int quantity)
         {
-            if (_product1.GetProduct() == null)
+            if (_product1.GetProduct() == null || _product1.GetProduct() == prod)
             {
                 _product1.SetProduct(prod);
-                _product1.SetQuantity(_product1.GetQuantity() + quantity);
-                return _product1;  
+                if (quantity >= 0)
+                {
+                    _product1.SetQuantity(_product1.GetQuantity() + quantity);
+                }
+                return _product1;
             }
-            else if (_product2.GetProduct() == null)
+            else if (_product2.GetProduct() == null || _product2.GetProduct() == prod)
             {
                 _product2.SetProduct(prod);
-                _product2.SetQuantity(_product2.GetQuantity() + quantity);
+                if (quantity >= 0)
+                {
+                    _product2.SetQuantity(_product2.GetQuantity() + quantity);
+                }
                 return _product2;
             }
-            else if (_product3.GetProduct() == null)
+            else if (_product3.GetProduct() == null || _product3.GetProduct() == prod)
             {
                 _product3.SetProduct(prod);
-                _product3.SetQuantity(_product3.GetQuantity() + quantity);
+                if (quantity >= 0)
+                {
+                    _product3.SetQuantity(_product3.GetQuantity() + quantity);
+                }
                 return _product3;
             }
-            return null;
-            
+            else
+            {
+                return null;
+            }
         }
 
         public ShoppingCartItem AddProduct(Product prod)
         {
-            if (_product1 == null)
-            {
-                _product1.SetProduct(prod);
-                return _product1;
-            }
-            else if (_product2 == null)
-            {
-                _product2.SetProduct(prod);
-                return _product2;
-            }
-            else if (_product3 == null)
-            {
-                _product3.SetProduct(prod);
-            }
-            return null;
+            return AddProduct(prod, 1);
         }
 
         public ShoppingCartItem RemoveProduct(Product prod, int quantity)
