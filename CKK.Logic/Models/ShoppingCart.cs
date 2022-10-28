@@ -17,30 +17,36 @@ namespace CKK.Logic.Models
         {
             _customer = cust;
         }
+
         public int GetCustomerId()
         {
             return _customer.GetId();
         }
+
         public ShoppingCartItem AddProduct(Product prod, int quantity)
         {
-            if (prod == _product1.GetProduct())
+            if (_product1.GetProduct() == null)
             {
+                _product1.SetProduct(prod);
                 _product1.SetQuantity(_product1.GetQuantity() + quantity);
                 return _product1;  
             }
-            else if (prod == _product2.GetProduct())
+            else if (_product2.GetProduct() == null)
             {
+                _product2.SetProduct(prod);
                 _product2.SetQuantity(_product2.GetQuantity() + quantity);
                 return _product2;
             }
-            else if (prod == _product3.GetProduct())
+            else if (_product3.GetProduct() == null)
             {
+                _product3.SetProduct(prod);
                 _product3.SetQuantity(_product3.GetQuantity() + quantity);
                 return _product3;
             }
             return null;
             
         }
+
         public ShoppingCartItem AddProduct(Product prod)
         {
             if (_product1 == null)
@@ -59,6 +65,7 @@ namespace CKK.Logic.Models
             }
             return null;
         }
+
         public ShoppingCartItem RemoveProduct(Product prod, int quantity)
         {
             if (prod == _product1.GetProduct())
@@ -91,6 +98,7 @@ namespace CKK.Logic.Models
             }
             return null;
         }
+
         public ShoppingCartItem GetProductById(int id)
         {
             if (_product1.GetProduct().GetId() == id)
@@ -107,6 +115,7 @@ namespace CKK.Logic.Models
             }
             return null;
         }
+
         public decimal GetTotal()
         {
             decimal product1;
@@ -140,6 +149,7 @@ namespace CKK.Logic.Models
             total = product1 + product2 + product3;
             return total;
         }
+
         public ShoppingCartItem GetProduct(int productNum)
         {
             if (_product1.GetProduct().GetId() == productNum)

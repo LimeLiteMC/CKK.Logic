@@ -1,17 +1,22 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CKK.Logic.Models;
-using Xunit;
 namespace CKK.Tests
 {
+    [TestClass]
     public class CKKTest
     {
-        [Fact]
+        [TestMethod]
         public void Test_AddsAProduct()
         {
-            //Make sure the unit test accurately tests the product and if it was added correctly.
+            //Arrange
             Product Nike = new Product();
             Nike.SetId(123);
             Nike.SetName("Nike");
             Nike.SetPrice(15.30m);
+
+            string expected = "Nike";
+            decimal expected2 = 15.30m;
+            int expected3 = 123;
 
             Customer Karen = new Customer();
             Karen.SetAddress("123 Fake St.");
@@ -19,23 +24,88 @@ namespace CKK.Tests
             Karen.SetId(123);
 
             ShoppingCart cart = new ShoppingCart(Karen);
-            //Arrage
-            ShoppingCartItem expected = Nike;
+
             //Act
             cart.AddProduct(Nike, 5);
-            ShoppingCartItem actual = cart.GetProductById(Nike.GetId());
+
             //Assert
-            Assert.True(expected == actual);
+            string actual = cart.GetProductById(Nike.GetId()).GetProduct().GetName();
+            decimal actual2 = cart.GetProductById(Nike.GetId()).GetProduct().GetPrice();
+            int actual3 = cart.GetProductById(Nike.GetId()).GetProduct().GetId();
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected2, actual2);
+            Assert.AreEqual(expected3, actual3);
         }
-        [Fact]
+        [TestMethod]
         public void Test_RemovesAProduct()
         {
             //Make sure the unit test accurately removes the product.
+            //Arrange
+            Product Nike = new Product();
+            Nike.SetId(123);
+            Nike.SetName("Nike");
+            Nike.SetPrice(15.30m);
 
+            string expected = null;
+            decimal expected2 = 0;
+            int expected3 = 0;
+
+            Customer Karen = new Customer();
+            Karen.SetAddress("123 Fake St.");
+            Karen.SetName("Karen");
+            Karen.SetId(123);
+
+            ShoppingCart cart = new ShoppingCart(Karen);
+            cart.AddProduct(Nike, 5);
+            //Act
+            cart.RemoveProduct(Nike, 5);
+
+            //Assert
+            string actual = cart.GetProductById(Nike.GetId()).GetProduct().GetName();
+            decimal actual2 = cart.GetProductById(Nike.GetId()).GetProduct().GetPrice();
+            int actual3 = cart.GetProductById(Nike.GetId()).GetProduct().GetId();
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected2, actual2);
+            Assert.AreEqual(expected3, actual3);
         }
-        [Fact]
+        [TestMethod]
         public void Test_GetsTheTotal()
         {
+            //Arrange
+            Product Nike = new Product();
+            Nike.SetId(123);
+            Nike.SetName("Shoes");
+            Nike.SetPrice(15.30m);
+
+            Product Apple = new Product();
+            Apple.SetId(456);
+            Apple.SetName("iPhone");
+            Apple.SetPrice(999.99m);
+
+            Product TimBuk2 = new Product();
+            TimBuk2.SetId(789);
+            TimBuk2.SetName("Astro x TimBuk2");
+            TimBuk2.SetPrice(200.20m);
+
+            decimal expected = 0;
+
+            Customer Karen = new Customer();
+            Karen.SetAddress("123 Fake St.");
+            Karen.SetName("Karen");
+            Karen.SetId(123);
+
+            ShoppingCart cart = new ShoppingCart(Karen);
+            cart.AddProduct(Nike, 5);
+            cart.AddProduct(Apple, 2);
+            cart.AddProduct(TimBuk2, 3);
+
+            //Act
+            cart.GetTotal();
+
+            //Assert
+            decimal actual = cart.GetProductById(Nike.GetId()).GetProduct().GetPrice();
+            Assert.AreEqual(expected, actual);
+
             //Create a unit test that checks to see if the total is accurate.
         }
     }
