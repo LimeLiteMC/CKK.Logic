@@ -9,9 +9,9 @@ namespace CKK.Logic.Models
     public class ShoppingCart
     {
         private Customer _customer;
-        private ShoppingCartItem _product1;
-        private ShoppingCartItem _product2;
-        private ShoppingCartItem _product3;
+        private ShoppingCartItem _product1 = new ShoppingCartItem(null, 0);
+        private ShoppingCartItem _product2 = new ShoppingCartItem(null, 0);
+        private ShoppingCartItem _product3= new ShoppingCartItem(null, 0);
 
         public ShoppingCart(Customer cust)
         {

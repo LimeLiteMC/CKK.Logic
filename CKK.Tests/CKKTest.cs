@@ -26,7 +26,7 @@ namespace CKK.Tests
             ShoppingCart cart = new ShoppingCart(Karen);
 
             //Act
-            cart.AddProduct(Nike, 5);
+            cart.AddProduct(Nike, 5 );
 
             //Assert
             string actual = cart.GetProductById(Nike.GetId()).GetProduct().GetName();
