@@ -69,8 +69,7 @@ namespace CKK.Logic.Models
             {
                 if (item.removal > 0)
                 {
-                    items.Remove(item.item);
-                    items.Add(new StoreItem(item.item.GetProduct(), item.removal));
+                    item.item.SetQuantity(item.removal);
                     return item.item;
                 }
                 else
@@ -92,14 +91,18 @@ namespace CKK.Logic.Models
                 from item in items
                 where item.GetProduct().GetId() == id
                 select item;
-            if (itemById == null)
+            foreach (var item in itemById)
             {
-                return null;
+                if (item == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return item;
+                }
             }
-            else
-            {
-                return itemById.First();
-            }
+            return null;
         }
 
     }
