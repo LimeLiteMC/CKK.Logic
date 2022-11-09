@@ -10,9 +10,7 @@ namespace CKK.Logic.Models
     {
         private int _id;
         private string _name;
-        private Product _product1;
-        private Product _product2;
-        private Product _product3;
+        List<StoreItem> items = new List<StoreItem>();
 
 
         public int GetId()
@@ -33,68 +31,74 @@ namespace CKK.Logic.Models
             _name = name;
         }
 
-        public void AddStoreItem(Product prod)
+        public StoreItem AddStoreItem(Product prod, int quantity)
         {
-            if (_product1 == null)
+            if (prod == null || quantity < 0)
             {
-                _product1 = prod;
+                return null;
             }
-            else if (_product2 == null)
+            foreach (var item in items)
             {
-                _product2 = prod;
+                if (item.GetProduct() == prod)
+                {
+                    item.SetQuantity(item.GetQuantity() + quantity);
+                    return item;
+                }
             }
-            else if (_product3 == null)
-            {
-                _product3 = prod;
-            }
+            StoreItem addedItem= new StoreItem(prod, quantity);
+            items.Add(addedItem);
+            return addedItem;
         }
-        public void RemoveStoreItem(int productNum)
+        public StoreItem RemoveStoreItem(int id, int quantity)
         {
-            switch(productNum){
-                case 1:
-                    _product1 = null;
-                    break;
-                case 2:
-                    _product2 = null;
-                    break;
-                case 3:
-                    _product3 = null;
-                    break;
-                default:
-                    break;
+            if (quantity == 0)
+            {
+                return null;
             }
+            var removedItem =
+                from item in items
+                where item.GetProduct().GetId() == id
+                let removal = item.GetQuantity() - quantity
+                select new {item, removal};
+            if (removedItem.First().removal <= 0)
+            {
+                removedItem.First().item.SetQuantity(0);
+                return removedItem.First().item;
+            }
+            foreach (var item in removedItem)
+            {
+                if (item.removal > 0)
+                {
+                    items.Remove(item.item);
+                    items.Add(new StoreItem(item.item.GetProduct(), item.removal));
+                    return item.item;
+                }
+                else
+                {
+                    item.item.SetQuantity(0);
+                    items.Add(new StoreItem(item.item.GetProduct(), 0));
+                    return item.item;
+                }
+            }
+            return null;
         }
-        public Product GetStoreItem(int productNum)
+        public List<StoreItem> GetStoreItems()
         {
-            switch (productNum)
-            {
-                case 1:
-                    return _product1;
-                case 2:
-                    return _product2;
-                case 3:
-                    return _product3;
-                default:
-                    return null;
-            }
+            return items;
         }
-        public Product FindStoreItemById(int id)
+        public StoreItem FindStoreItemById(int id)
         {
-            if (id == _product1.GetId())
+            var itemById =
+                from item in items
+                where item.GetProduct().GetId() == id
+                select item;
+            if (itemById == null)
             {
-                return _product1;
-            }
-            else if (id == _product2.GetId())
-            {
-                return _product2;
-            }
-            else if (id == _product3.GetId())
-            {
-                return _product3;
+                return null;
             }
             else
             {
-                return null;
+                return itemById.First();
             }
         }
 

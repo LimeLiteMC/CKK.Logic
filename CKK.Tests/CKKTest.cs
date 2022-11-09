@@ -58,7 +58,7 @@ namespace CKK.Tests
             ShoppingCart cart = new ShoppingCart(Karen);
             cart.AddProduct(Nike, 5);
             //Act
-            cart.RemoveProduct(Nike, 2);
+            cart.RemoveProduct(Nike.GetId(), 2);
 
             //Assert
             string actual = cart.GetProductById(Nike.GetId()).GetProduct().GetName();
