@@ -23,12 +23,21 @@ namespace CKK.Logic.Models
 
         public ShoppingCartItem AddProduct(Product prod, int quantity)
         {
-            var product =
-                from item in Products
-                where (item.GetProduct().GetName() == prod.GetName()) && (quantity > 0)
-                let totalReturned = item.GetQuantity() + quantity
-                select item;
-            return product.First();
+            if (prod == null || quantity < 0)
+            {
+                return null;
+            }
+            foreach (var item in Products)
+            {
+                if (item.GetProduct() == prod)
+                {
+                    item.SetQuantity(item.GetQuantity() + quantity);
+                    return item;
+                }
+            }
+            ShoppingCartItem addedProduct = new ShoppingCartItem(prod, quantity);
+            Products.Add(addedProduct);
+            return addedProduct;
         }
 
         public ShoppingCartItem AddProduct(Product prod)
@@ -38,33 +47,52 @@ namespace CKK.Logic.Models
 
         public ShoppingCartItem RemoveProduct(int id, int quantity)
         {
-            var removedProduct =
-                from product in Products
-                where (product.GetProduct().GetId() == id) && (product.GetQuantity() > 0)
-                let removal = product.GetQuantity() - quantity
-                select new { removal, product };
-            foreach (var product in removedProduct)
+            if (quantity == 0)
             {
-                if (product.removal <= 0)
+                return null;
+            }
+            foreach (var product in Products)
+            {
+                if (product.GetProduct().GetId() == id)
                 {
-                    Products.Remove(product.product);
-                }
-                else
-                {
-                    Products.Remove(product.product);
-                    product.product.SetQuantity(product.removal);
-                    Products.Add(new ShoppingCartItem(product.product.GetProduct(), product.removal));
+                    int subtractValue = product.GetQuantity() - quantity;
+                    if (subtractValue <= 0)
+                    {
+                        Products.Remove(product);
+                        return new ShoppingCartItem(null, 0);
+                    }
+                    else if(subtractValue > 0)
+                    {
+                        product.SetQuantity(subtractValue);
+                        return product;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
             return null;
         }
         public ShoppingCartItem GetProductById(int id)
         {
+
             var productById =
                 from product in Products
                 where product.GetProduct().GetId() == id
                 select product;
-            return productById.First();
+            foreach (var product in productById)
+            {
+                if (product == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return product;
+                }
+            }
+            return null;
         }
 
         public decimal GetTotal()
