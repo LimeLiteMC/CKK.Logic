@@ -1,34 +1,40 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CKK.Logic.Interfaces;
+
 namespace CKK.Logic.Models
 {
-    public class Customer
+    public class Customer : Entity
     {
-        private int _id;
-        private string _name;
-        private string _address;
-        public int GetId()
+        public override int ID
         {
-            return _id;
+            get
+            {
+                return ID;
+            }
+            set
+            {
+                ID = value;
+            }
         }
-        public void SetId(int id)
+        public override string Name
         {
-            _id = id;
+            get
+            {
+                return Name;
+            }
+            set
+            {
+                Name = value;
+            }
         }
-        public string GetName()
+        public string Address
         {
-            return _name;
-        }
-        public void SetName(string name)
-        {
-            _name = name;
-        }
-        public string GetAddress()
-        {
-            return _address;
-        }
-        public void SetAddress(string address)
-        {
-            _address = address;
+            get;
+            set;
         }
 
     }

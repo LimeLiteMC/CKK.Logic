@@ -1,37 +1,45 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CKK.Logic.Interfaces;
+
 namespace CKK.Logic.Models
 {
-    public class ShoppingCartItem
+    public class ShoppingCartItem : InventoryItem
     {
-        private Product _product;
-        private int _quantity;
-
         public ShoppingCartItem(Product product, int quantity)
         {
-            _product = product;
-            _quantity = quantity;
+            prod = product;
+            Quantity = quantity;
         }
-        public int GetQuantity()
+        public override Product prod
         {
-            return _quantity;
+            get
+            {
+                return prod;
+            }
+            set
+            {
+                prod = value;
+            }
         }
-        public void SetQuantity(int quantity)
+        public override int Quantity
         {
-            _quantity = quantity;
-        }
-        public Product GetProduct()
-        {
-            return _product;
-        }
-        public void SetProduct(Product product)
-        {
-            _product = product;
+            get
+            {
+                return Quantity;
+            }
+            set
+            {
+                Quantity = value;
+            }
         }
         public decimal GetTotal()
         {
-            decimal total = _product.GetPrice() * _quantity;
+            decimal total = prod.Price * Quantity;
             return total;
         }
-
     }
 }

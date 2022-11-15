@@ -1,34 +1,40 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CKK.Logic.Interfaces;
+
 namespace CKK.Logic.Models
 {
-    public class Product
+    public class Product : Entity
     {
-        private int _id;
-        private string _name;
-        private decimal _price;
-        public int GetId()
+        public override int ID
         {
-            return _id;
+            get
+            {
+                return ID;
+            }
+            set
+            {
+                ID = value;
+            }
         }
-        public void SetId(int id)
+        public override string Name
         {
-            _id = id;
+            get
+            {
+                return Name;
+            }
+            set
+            {
+                Name = value;
+            }
         }
-        public string GetName()
+        public decimal Price
         {
-            return _name;
-        }
-        public void SetName(string name)
-        {
-            _name = name;
-        }
-        public decimal GetPrice()
-        {
-            return _price;
-        }
-        public void SetPrice(decimal price)
-        {
-            _price = price;
+            get;
+            set;
         }
     }
 }

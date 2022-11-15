@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CKK.Logic.Interfaces;
 
 namespace CKK.Logic.Models
 {
-    public class Store
+    public class Store : Entity
     {
-        private int _id;
-        private string _name;
         List<StoreItem> items = new List<StoreItem>();
 
-
-        public int GetId()
+        public override int ID
         {
-            return _id;
+            get
+            {
+                return ID;
+            }
+            set
+            {
+                ID = value;
+            }
         }
-        public void SetId(int id)
+        public override string Name
         {
-            _id = id;
-        }
-
-        public string GetName()
-        {
-            return _name;
-        }
-        public void SetName( string name)
-        {
-            _name = name;
+            get
+            {
+                return Name;
+            }
+            set
+            {
+                Name = value;
+            }
         }
 
         public StoreItem AddStoreItem(Product prod, int quantity)
@@ -39,9 +42,9 @@ namespace CKK.Logic.Models
             }
             foreach (var item in items)
             {
-                if (item.GetProduct() == prod)
+                if (item.prod == prod)
                 {
-                    item.SetQuantity(item.GetQuantity() + quantity);
+                    item.Quantity = item.Quantity + quantity;
                     return item;
                 }
             }
@@ -57,25 +60,25 @@ namespace CKK.Logic.Models
             }
             var removedItem =
                 from item in items
-                where item.GetProduct().GetId() == id
-                let removal = item.GetQuantity() - quantity
+                where item.prod.ID == id
+                let removal = item.Quantity - quantity
                 select new {item, removal};
             if (removedItem.First().removal <= 0)
             {
-                removedItem.First().item.SetQuantity(0);
+                removedItem.First().item.Quantity = 0;
                 return removedItem.First().item;
             }
             foreach (var item in removedItem)
             {
                 if (item.removal > 0)
                 {
-                    item.item.SetQuantity(item.removal);
+                    item.item.Quantity = item.removal;
                     return item.item;
                 }
                 else
                 {
-                    item.item.SetQuantity(0);
-                    items.Add(new StoreItem(item.item.GetProduct(), 0));
+                    item.item.Quantity = 0;
+                    items.Add(new StoreItem(item.item.prod, 0));
                     return item.item;
                 }
             }
@@ -89,7 +92,7 @@ namespace CKK.Logic.Models
         {
             var itemById =
                 from item in items
-                where item.GetProduct().GetId() == id
+                where item.prod.ID == id
                 select item;
             foreach (var item in itemById)
             {
