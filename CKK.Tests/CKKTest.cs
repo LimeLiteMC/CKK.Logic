@@ -10,18 +10,18 @@ namespace CKK.Tests
         {
             //Arrange
             Product Nike = new Product();
-            Nike.SetId(123);
-            Nike.SetName("Nike");
-            Nike.SetPrice(15.30m);
+            Nike.ID = 123;
+            Nike.Name = "Nike";
+            Nike.Price = 15.30m;
 
             string expected = "Nike";
             decimal expected2 = 15.30m;
             int expected3 = 123;
 
             Customer Karen = new Customer();
-            Karen.SetAddress("123 Fake St.");
-            Karen.SetName("Karen");
-            Karen.SetId(123);
+            Karen.Address = "123 Fake St.";
+            Karen.Name = "Karen";
+            Karen.ID = 123;
 
             ShoppingCart cart = new ShoppingCart(Karen);
 
@@ -29,9 +29,9 @@ namespace CKK.Tests
             cart.AddProduct(Nike, 5 );
 
             //Assert
-            string actual = cart.GetProductById(Nike.GetId()).GetProduct().GetName();
-            decimal actual2 = cart.GetProductById(Nike.GetId()).GetProduct().GetPrice();
-            int actual3 = cart.GetProductById(Nike.GetId()).GetProduct().GetId();
+            string actual = cart.GetProductById(Nike.ID).prod.Name;
+            decimal actual2 = cart.GetProductById(Nike.ID).prod.Price;
+            int actual3 = cart.GetProductById(Nike.ID).prod.ID;
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(expected2, actual2);
             Assert.AreEqual(expected3, actual3);
@@ -42,28 +42,28 @@ namespace CKK.Tests
             //Make sure the unit test accurately removes the product.
             //Arrange
             Product Nike = new Product();
-            Nike.SetId(123);
-            Nike.SetName("Nike");
-            Nike.SetPrice(15.30m);
+            Nike.ID = 123;
+            Nike.Name = "Nike";
+            Nike.Price = 15.30m;
 
             string expected = "Nike";
             int expected2 = 3;
             int expected3 = 123;
 
             Customer Karen = new Customer();
-            Karen.SetAddress("123 Fake St.");
-            Karen.SetName("Karen");
-            Karen.SetId(123);
+            Karen.Address = "123 Fake St.";
+            Karen.Name = "Karen";
+            Karen.ID = 123;
 
             ShoppingCart cart = new ShoppingCart(Karen);
             cart.AddProduct(Nike, 5);
             //Act
-            cart.RemoveProduct(Nike.GetId(), 2);
+            cart.RemoveProduct(Nike.ID, 2);
 
             //Assert
-            string actual = cart.GetProductById(Nike.GetId()).GetProduct().GetName();
-            int actual2 = cart.GetProductById(Nike.GetId()).GetQuantity();
-            int actual3 = cart.GetProductById(Nike.GetId()).GetProduct().GetId();
+            string actual = cart.GetProductById(Nike.ID).prod.Name;
+            int actual2 = cart.GetProductById(Nike.ID).Quantity;
+            int actual3 = cart.GetProductById(Nike.ID).prod.ID;
             Assert.AreEqual(expected, actual);
             Assert.AreEqual(expected2, actual2);
             Assert.AreEqual(expected3, actual3);
@@ -73,26 +73,26 @@ namespace CKK.Tests
         {
             //Arrange
             Product Nike = new Product();
-            Nike.SetId(123);
-            Nike.SetName("Shoes");
-            Nike.SetPrice(15.30m);
+            Nike.ID = 123;
+            Nike.Name = "Nike";
+            Nike.Price = 15.30m;
 
             Product Apple = new Product();
-            Apple.SetId(456);
-            Apple.SetName("iPhone");
-            Apple.SetPrice(999.99m);
+            Apple.ID = 456;
+            Apple.Name = "iPhone";
+            Apple.Price = 999.99m;
 
             Product TimBuk2 = new Product();
-            TimBuk2.SetId(789);
-            TimBuk2.SetName("Astro x TimBuk2");
-            TimBuk2.SetPrice(200.20m);
+            TimBuk2.ID = 789;
+            TimBuk2.Name = "Astro x TimBuk2";
+            TimBuk2.Price = 200.20m;
             //76.5 + 1999.98 + 600.60
             decimal expected = 2677.08m ;
 
             Customer Karen = new Customer();
-            Karen.SetAddress("123 Fake St.");
-            Karen.SetName("Karen");
-            Karen.SetId(123);
+            Karen.Address = "123 Fake St.";
+            Karen.Name = "Karen";
+            Karen.ID = 123;
 
             ShoppingCart cart = new ShoppingCart(Karen);
             cart.AddProduct(Nike, 5);
