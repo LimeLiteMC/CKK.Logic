@@ -9,28 +9,6 @@ namespace CKK.Logic.Models
 {
     public class Product : Entity
     {
-        public override int ID
-        {
-            get
-            {
-                return ID;
-            }
-            set
-            {
-                ID = value;
-            }
-        }
-        public override string Name
-        {
-            get
-            {
-                return Name;
-            }
-            set
-            {
-                Name = value;
-            }
-        }
         public decimal Price
         {
             get;

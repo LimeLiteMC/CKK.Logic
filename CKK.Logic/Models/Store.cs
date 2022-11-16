@@ -11,29 +11,6 @@ namespace CKK.Logic.Models
     {
         List<StoreItem> items = new List<StoreItem>();
 
-        public override int ID
-        {
-            get
-            {
-                return ID;
-            }
-            set
-            {
-                ID = value;
-            }
-        }
-        public override string Name
-        {
-            get
-            {
-                return Name;
-            }
-            set
-            {
-                Name = value;
-            }
-        }
-
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
             if (prod == null || quantity < 0)

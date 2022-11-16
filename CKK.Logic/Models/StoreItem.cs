@@ -14,27 +14,5 @@ namespace CKK.Logic.Models
             prod = product;
             Quantity = quantity;
         }
-        public override Product prod
-        {
-            get
-            {
-                return prod;
-            }
-            set
-            {
-                prod = value;
-            }
-        }
-        public override int Quantity
-        {
-            get
-            {
-                return Quantity;
-            }
-            set
-            {
-                Quantity = value;
-            }
-        }
     }
 }
