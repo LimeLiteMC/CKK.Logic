@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CKK.Logic.Interfaces;
+using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Models
 {
@@ -33,15 +34,19 @@ namespace CKK.Logic.Models
 
         public ShoppingCartItem AddProduct(Product prod, int quantity)
         {
+            if (quantity < 0)
+            {
+                throw new InventoryItemStockTooLowException("The stock cannot fall below 0 items.");
+            }
             if (prod == null || quantity < 0)
             {
                 return null;
             }
             foreach (var item in Products)
             {
-                if (item.prod == prod)
+                if (item.GetProd() == prod)
                 {
-                    item.Quantity += quantity;
+                    item.SetQuant(item.GetQuant() + quantity);
                     return item;
                 }
             }
@@ -57,15 +62,23 @@ namespace CKK.Logic.Models
 
         public ShoppingCartItem RemoveProduct(int id, int quantity)
         {
+            if (quantity < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            if (GetProductById(id) == null)
+            {
+                throw new ProductDoesNotExistException();
+            }
             if (quantity == 0)
             {
                 return null;
             }
             foreach (var product in Products)
             {
-                if (product.prod.ID == id)
+                if (product.GetProd().ID == id)
                 {
-                    int subtractValue = product.Quantity - quantity;
+                    int subtractValue = product.GetQuant() - quantity;
                     if (subtractValue <= 0)
                     {
                         Products.Remove(product);
@@ -73,7 +86,7 @@ namespace CKK.Logic.Models
                     }
                     else if(subtractValue > 0)
                     {
-                        product.Quantity = subtractValue;
+                        product.SetQuant(subtractValue);
                         return product;
                     }
                     else
@@ -86,14 +99,18 @@ namespace CKK.Logic.Models
         }
         public ShoppingCartItem GetProductById(int id)
         {
+            if (id <= 0)
+            {
+                throw new InvalidIdException("Invalid ID, cannot be less than or equal to 0.", id);
+            }
 
             var productById =
                 from product in Products
-                where product.prod.ID == id
+                where product.GetProd().ID == id
                 select product;
             foreach (var product in productById)
             {
-                if (product == null)
+                if (product.GetProd() == null)
                 {
                     return null;
                 }
@@ -109,7 +126,7 @@ namespace CKK.Logic.Models
         {
             var total =
                 from prices in Products
-                let amount = prices.prod.Price * prices.Quantity
+                let amount = prices.GetProd().Price * prices.GetQuant()
                 select new { amount };
             decimal statement = 0.0m;
             foreach (var items in total)

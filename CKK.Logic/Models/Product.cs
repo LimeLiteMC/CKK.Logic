@@ -11,8 +11,17 @@ namespace CKK.Logic.Models
     {
         public decimal Price
         {
-            get;
-            set;
+            get
+            {
+                return Price;
+            }
+            set 
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+            }
         }
     }
 }

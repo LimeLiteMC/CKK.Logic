@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CKK.Logic.Models;
+using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Interfaces
 {
@@ -11,8 +12,17 @@ namespace CKK.Logic.Interfaces
     {
         public int ID
         {
-            get;
-            set;
+            get
+            {
+                return ID;
+            }
+            set 
+            {
+                if (ID <= 0)
+                {
+                    throw  new InvalidIdException("ID cannot be less than or equal to zero.", ID);
+                }
+            }
         }
         public string Name
         {

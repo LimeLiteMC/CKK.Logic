@@ -4,20 +4,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CKK.Logic.Models;
+using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Interfaces
 {
     public abstract class InventoryItem
     {
-        public Product prod
+        private Product Prod
         {
-            set;
             get;
+            set;   
         }
-        public int Quantity
+        private int Quantity
         {
-            set;
             get;
+            set; 
         }
+        public Product GetProd()
+        {
+            return Prod;
+        }
+        public void SetProd(Product prod)
+        {
+            Prod = prod;
+        }
+        public int GetQuant()
+        {
+            return Quantity;
+        }
+        public void SetQuant(int quantity)
+        {
+            if (quantity < 0)
+            {
+                throw new InventoryItemStockTooLowException("The stock cannot fall below 0 items.");
+            }
+            Quantity = quantity;
+        }
+
     }
 }
