@@ -29,7 +29,7 @@ namespace CKK.Logic.Models
 
         public int GetCustomerId()
         {
-            return Customer.ID;
+            return Customer.Id;
         }
 
         public ShoppingCartItem AddProduct(Product prod, int quantity)
@@ -44,9 +44,9 @@ namespace CKK.Logic.Models
             }
             foreach (var item in Products)
             {
-                if (item.GetProd() == prod)
+                if (item.Product == prod)
                 {
-                    item.SetQuant(item.GetQuant() + quantity);
+                    item.Quantity += quantity;
                     return item;
                 }
             }
@@ -76,9 +76,9 @@ namespace CKK.Logic.Models
             }
             foreach (var product in Products)
             {
-                if (product.GetProd().ID == id)
+                if (product.Product.Id == id)
                 {
-                    int subtractValue = product.GetQuant() - quantity;
+                    int subtractValue = product.Quantity - quantity;
                     if (subtractValue <= 0)
                     {
                         Products.Remove(product);
@@ -86,7 +86,7 @@ namespace CKK.Logic.Models
                     }
                     else if(subtractValue > 0)
                     {
-                        product.SetQuant(subtractValue);
+                        product.Quantity = subtractValue;
                         return product;
                     }
                     else
@@ -106,11 +106,11 @@ namespace CKK.Logic.Models
 
             var productById =
                 from product in Products
-                where product.GetProd().ID == id
+                where product.Product.Id == id
                 select product;
             foreach (var product in productById)
             {
-                if (product.GetProd() == null)
+                if (product.Product == null)
                 {
                     return null;
                 }
@@ -126,7 +126,7 @@ namespace CKK.Logic.Models
         {
             var total =
                 from prices in Products
-                let amount = prices.GetProd().Price * prices.GetQuant()
+                let amount = prices.Product.Price * prices.Quantity
                 select new { amount };
             decimal statement = 0.0m;
             foreach (var items in total)

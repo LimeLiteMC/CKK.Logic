@@ -25,13 +25,14 @@ namespace CKK.Logic.Models
             }
             foreach (var item in items)
             {
-                if (item.GetProd() == prod)
+                if (item.Product == prod)
                 {
-                    item.SetQuant(item.GetQuant() + quantity);
+                    item.Quantity += quantity;
                     return item;
                 }
             }
             StoreItem addedItem= new StoreItem(prod, quantity);
+            addedItem.Product.Id = items.Count;
             items.Add(addedItem);
             return addedItem;
         }
@@ -51,25 +52,25 @@ namespace CKK.Logic.Models
             }
             var removedItem =
                 from item in items
-                where item.GetProd().ID == id
-                let removal = item.GetQuant() - quantity
+                where item.Product.Id == id
+                let removal = item.Quantity - quantity
                 select new {item, removal};
             if (removedItem.First().removal <= 0)
             {
-                removedItem.First().item.SetQuant(0);
+                removedItem.First().item.Quantity = 0;
                 return removedItem.First().item;
             }
             foreach (var item in removedItem)
             {
                 if (item.removal > 0)
                 {
-                    item.item.SetQuant(item.removal);
+                    item.item.Quantity = item.removal;
                     return item.item;
                 }
                 else
                 {
-                    item.item.SetQuant(0);
-                    items.Add(new StoreItem(item.item.GetProd(), 0));
+                    item.item.Quantity = 0;
+                    items.Add(new StoreItem(item.item.Product, 0));
                     return item.item;
                 }
             }
@@ -83,7 +84,7 @@ namespace CKK.Logic.Models
         {
             var itemById =
                 from item in items
-                where item.GetProd().ID == id
+                where item.Product.Id == id
                 select item;
             foreach (var item in itemById)
             {

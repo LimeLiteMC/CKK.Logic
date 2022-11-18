@@ -12,12 +12,12 @@ namespace CKK.Logic.Models
 
         public ShoppingCartItem(Product product, int quantity)
         {
-            SetProd(product);
-            SetQuant(quantity);
+            Quantity = quantity;
+            Product = product;
         }
         public decimal GetTotal()
         {
-            decimal total = GetProd().Price * GetQuant();
+            decimal total = Product.Price * Quantity;
             return total;
         }
     }

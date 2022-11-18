@@ -11,8 +11,8 @@ namespace CKK.Logic.Models
     {
         public StoreItem(Product product, int quantity)
         {
-            SetProd(product);
-            SetQuant(quantity);
+            Product = product;
+            Quantity = quantity;
         }
     }
 }
