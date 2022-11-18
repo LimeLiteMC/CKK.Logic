@@ -11,6 +11,7 @@ namespace CKK.Logic.Interfaces
     public abstract class Entity
     {
         private int id;
+        private string name;
         public int Id
         {
             get
@@ -19,20 +20,26 @@ namespace CKK.Logic.Interfaces
             }
             set 
             {
-                if (Id <= 0)
+                if (value <= 0)
                 {
                     throw  new InvalidIdException("ID cannot be less than or equal to zero.", Id);
                 }
                 else
                 {
-                    id = Id;
+                    id = value;
                 }
             }
         }
         public string Name
         {
-            get;
-            set;
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
         }
     }
 }

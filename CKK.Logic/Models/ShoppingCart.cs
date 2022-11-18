@@ -15,12 +15,8 @@ namespace CKK.Logic.Models
             get;
             set;
         }
-        
-        public List<ShoppingCartItem> Products
-        {
-            get;
-            set;
-        }
+
+        public List<ShoppingCartItem> Products = new List<ShoppingCartItem>();
 
         public ShoppingCart(Customer cust)
         {
@@ -74,25 +70,24 @@ namespace CKK.Logic.Models
             {
                 return null;
             }
-            foreach (var product in Products)
+            var removableItems =
+                from product in Products
+                where product.Product.Id == id
+                select product;
+            foreach (var product in removableItems)
             {
-                if (product.Product.Id == id)
+                int subtractQuantity = product.Quantity - quantity;
+                if (subtractQuantity <= 0)
                 {
-                    int subtractValue = product.Quantity - quantity;
-                    if (subtractValue <= 0)
-                    {
-                        Products.Remove(product);
-                        return new ShoppingCartItem(null, 0);
-                    }
-                    else if(subtractValue > 0)
-                    {
-                        product.Quantity = subtractValue;
-                        return product;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    product.Quantity = 0;
+                    product.Product = null;
+                    Products.Remove(product);
+                    return new ShoppingCartItem(null,0);
+                }
+                else if (subtractQuantity > 0)
+                {
+                    product.Quantity = subtractQuantity;
+                    return product;
                 }
             }
             return null;

@@ -9,10 +9,17 @@ namespace CKK.Logic.Models
 {
     public class Customer : Entity
     {
+        private string address;
         public string Address
         {
-            get;
-            set;
+            get
+            {
+                return address;
+            }
+            set
+            {
+                address = value;
+            }
         }
 
     }

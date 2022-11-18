@@ -10,7 +10,7 @@ namespace CKK.Logic.Interfaces
 {
     public abstract class InventoryItem
     {
-        public Product Product { get; set; }
+        private Product product;
         private int quantity;
         public int Quantity
         {
@@ -20,14 +20,25 @@ namespace CKK.Logic.Interfaces
             }
             set
             {
-                if (quantity < 0)
+                if (value < 0)
                 {
                     throw new InventoryItemStockTooLowException("The stock cannot fall below 0 items.");
                 }
                 else
                 {
-                    quantity = Quantity;
+                    quantity = value;
                 }
+            }
+        }
+        public Product Product
+        {
+            get
+            {
+                return product;
+            }
+            set
+            {
+                product = value;
             }
         }
 

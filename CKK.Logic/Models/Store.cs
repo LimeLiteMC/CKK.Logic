@@ -27,12 +27,11 @@ namespace CKK.Logic.Models
             {
                 if (item.Product == prod)
                 {
-                    item.Quantity += quantity;
+                    item.Quantity = item.Quantity + quantity;
                     return item;
                 }
             }
-            StoreItem addedItem= new StoreItem(prod, quantity);
-            addedItem.Product.Id = items.Count;
+            StoreItem addedItem = new StoreItem(prod, quantity);
             items.Add(addedItem);
             return addedItem;
         }
@@ -82,6 +81,10 @@ namespace CKK.Logic.Models
         }
         public StoreItem FindStoreItemById(int id)
         {
+            if (id < 0)
+            {
+                throw new InvalidIdException("ID cannot be 0 or less.");
+            }
             var itemById =
                 from item in items
                 where item.Product.Id == id
