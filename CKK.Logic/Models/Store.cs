@@ -31,6 +31,22 @@ namespace CKK.Logic.Models
                     return item;
                 }
             }
+            if (prod.Id == 0)
+            {
+                while (prod.Id == 0) 
+                {
+                    Random random = new Random();
+                    int newID = random.Next(items.Count() + 1);
+                    foreach (var item in items)
+                    {
+                        if(item.Product.Id == newID)
+                        {
+                            newID = 0;
+                        }
+                    }
+                    prod.Id = newID;
+                }
+            }
             StoreItem addedItem = new StoreItem(prod, quantity);
             items.Add(addedItem);
             return addedItem;
@@ -101,6 +117,16 @@ namespace CKK.Logic.Models
                 }
             }
             return null;
+        }
+        public void DeleteStoreItem(int id)
+        {
+            foreach(var item in items)
+            {
+                if (item.Product.Id == id)
+                {
+                    items.Remove(item);
+                }
+            }
         }
 
     }

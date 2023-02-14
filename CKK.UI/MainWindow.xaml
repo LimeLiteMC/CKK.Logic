@@ -1,0 +1,19 @@
+﻿<Window x:Class="CKK.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:PresentationOptions = "http://schemas.microsoft.com/winfx/2006/xaml/present ation/options"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CKK.UI"
+        mc:Ignorable="PresentationOptions"
+        Title="Corey's Knick Knacks Login" Height="450" Width="800" >
+    <Grid Background="AliceBlue" MinHeight="450" MinWidth="800">
+        <Label Content="Welcome to Corey's Knick Knacks!" FontSize="23" Margin="222,123,221,267"/>
+        <Label Content="Username:" FontSize="16" Margin="222,200,489,200"/>
+        <Label Content="Password:" FontSize="16" Margin="222,259,0,0" Height="51" VerticalAlignment="Top" HorizontalAlignment="Left" Width="92"/>
+        <PasswordBox x:Name="PasswordBox" FontSize ="16" Margin="319,259,0,0" MaxHeight="51" MaxWidth="203" Height="51" VerticalAlignment="Top" HorizontalAlignment="Left" Width="203"/>
+        <Button Content="Login" Background="DeepSkyBlue" Foreground="#FFF" FontSize="26" Margin="340,327,0,0" Click="LoginButton_Click" VerticalAlignment ="Top" HorizontalAlignment="Left" Width="120" MaxHeight="63" MaxWidth="120" MinHeight="63" MinWidth="120"/>
+        <TextBox x:Name="UsernameBox" Text="" FontSize ="16" TextWrapping="Wrap" Margin="319,188,0,0" MaxHeight="51" MaxWidth="203" Height="51" VerticalAlignment="Top" HorizontalAlignment="Left" Width="203"/>
+    </Grid>
+</Window>
