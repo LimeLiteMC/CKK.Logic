@@ -11,9 +11,9 @@
         <TextBox x:Name="NameBox" Text="" FontSize="16" TextWrapping="Wrap" Margin="0,144,0,0" HorizontalAlignment="Center" Width="172" Height="33" VerticalAlignment="Top"/>
         <Label Content="Quantity:" FontSize="16" Margin="233,181,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76"/>
         <TextBox x:Name="QuantityBox" Text="" FontSize="16" TextWrapping="Wrap" Margin="0,187,0,0" HorizontalAlignment="Center" Width="172" Height="33" VerticalAlignment="Top"/>
-        <Label Content="Number on Shelves:" FontSize="16" Margin="156,224,0,0" Height="39" VerticalAlignment="Top" HorizontalAlignment="Left" Width="153"/>
-        <TextBox x:Name="ShelfBox" Text="" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Center" Width="172" Height="33" VerticalAlignment="Top" Margin="0,230,0,0"/>
-        <Button Content="Submit" Margin="0,311,0,0" Height="45" VerticalAlignment="Top" HorizontalAlignment="Center" Width="104"/>
+        <Label Content="Price:" FontSize="16" Margin="260,230,0,0" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" Width="49"/>
+        <TextBox x:Name="PriceBox" Text="" FontSize="16" TextWrapping="Wrap" HorizontalAlignment="Center" Width="172" Height="33" VerticalAlignment="Top" Margin="0,230,0,0"/>
+        <Button x:Name="SubmitItemButton" Content="Submit" Margin="0,311,0,0" Height="45" VerticalAlignment="Top" HorizontalAlignment="Center" Width="104" Click="SubmitItemButton_Click"/>
 
     </Grid>
 </Window>
