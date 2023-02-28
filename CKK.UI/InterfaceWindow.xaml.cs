@@ -23,7 +23,7 @@ namespace CKK.UI
     {
         private IStore _Store;
 
-        public ObservableCollection<StoreItem> _Items { get; private set;}
+        public ObservableCollection<StoreItem> _Items { get; set;}
         public InterfaceWindow()
         {
             InitializeComponent();
@@ -34,7 +34,14 @@ namespace CKK.UI
             InitializeComponent();
             _Items = new ObservableCollection<StoreItem>();
             ListBox.ItemsSource = _Items;
-            
+            RefreshList();
+        }
+
+        private void RefreshList()
+        {
+            _Items.Clear();
+            foreach (StoreItem si in new ObservableCollection<StoreItem>(_Store.GetStoreItems()))
+                _Items.Add(si);
         }
 
         private void NewButton_Click_1(object sender, RoutedEventArgs e)

@@ -8,8 +8,11 @@
         Title="Corey's Knick Knacks Inventory" Height="450" Width="800">
     <Grid Background="AliceBlue" MinHeight="450" MinWidth="4">
         <DockPanel>
-            <ListBox x:Name="ListBox" DockPanel.Dock="Bottom" Margin="0,103,0,10" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <ListBoxItem Content="{Binding }"/>
+            <ListBox x:Name="ListBox" DockPanel.Dock="Bottom" Margin="0,103,0,10" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="327" ItemsSource="{Binding _Items}" DisplayMemberPath="Text">
+                <ListBox.BindingGroup>
+                    <BindingGroup/>
+                </ListBox.BindingGroup>
+
             </ListBox>
         </DockPanel>
         <Button x:Name="NewButton" Content="New+" FontSize="15" Margin="491,32,0,0" Click="NewButton_Click_1" MaxHeight="37" MaxWidth="69" MinHeight="37" MinWidth="69" HorizontalAlignment="Left" Width="69" Height="37" VerticalAlignment="Top"/>
