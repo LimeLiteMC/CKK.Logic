@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CKK.Logic;
+using CKK.Logic.Interfaces;
+using CKK.Logic.Models;
 
 namespace CKK.UI
 {
@@ -19,9 +22,31 @@ namespace CKK.UI
     /// </summary>
     public partial class RemoveItemWindow : Window
     {
-        public RemoveItemWindow()
+        private IStore _Store;
+        public RemoveItemWindow(IStore store)
         {
             InitializeComponent();
+            Store tp = (Store)Application.Current.FindResource("globStore");
+        }
+
+        private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            _Store.DeleteStoreItem(int.Parse(IDBox.Text));
+            InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
+            updatedInventory.Show();
+        }
+
+        private void RemoveItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            _Store.RemoveStoreItem(int.Parse(IDBox.Text),int.Parse(QuantityBox.Text));
+            InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
+            updatedInventory.Show();
+        }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
+            updatedInventory.Show();
         }
     }
 }

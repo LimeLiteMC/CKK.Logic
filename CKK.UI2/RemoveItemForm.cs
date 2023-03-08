@@ -16,5 +16,10 @@ namespace CKK.UI2
         {
             InitializeComponent();
         }
+
+        private void RemSubmitButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

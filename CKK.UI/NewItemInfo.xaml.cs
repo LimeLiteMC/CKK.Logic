@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,32 +17,24 @@ using CKK.Logic.Interfaces;
 using CKK.Logic.Models;
 namespace CKK.UI
 {
-    /// <summary>
-    /// Interaction logic for NewItemInfo.xaml
-    /// </summary>
     public partial class NewItemInfo : Window
     {
-        public StoreItem ItemForList;
-        public NewItemInfo()
+        private IStore _Store;
+        public NewItemInfo(IStore store)
         {
+            _Store = store;
             InitializeComponent();
         }
 
         private void SubmitItemButton_Click(object sender, RoutedEventArgs e)
         {
-            if(NameBox != null & QuantityBox != null & PriceBox != null)
-            {
-                Product newProduct = new Product();
-                StoreItem newItem = new StoreItem(newProduct, int.Parse(QuantityBox.Text));
-                newItem.Product.Name = NameBox.Text;
-                newItem.Product.Price = decimal.Parse(PriceBox.Text);
-                newItem.Product.Id = 0;
-                ItemForList = newItem;
-            }
-            else
-            {
-                MessageBox.Show("Please provide all of the required information.");
-            }
+            Product newProduct = new Product();
+            newProduct.Name = NameBox.Text;
+            newProduct.Price = decimal.Parse(PriceBox.Text);
+            newProduct.Id = 0;
+            _Store.AddStoreItem(newProduct, int.Parse(QuantityBox.Text));
+            InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
+            updatedInventory.Show();
             this.Close();
         }
     }

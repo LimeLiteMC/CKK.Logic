@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CKK.Logic.Interfaces;
 
 namespace CKK.UI2
 {
     public partial class InventoryWindow : Form
     {
+        private IStore Store;
         public InventoryWindow()
         {
             InitializeComponent();

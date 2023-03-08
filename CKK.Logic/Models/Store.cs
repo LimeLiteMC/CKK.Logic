@@ -33,19 +33,10 @@ namespace CKK.Logic.Models
             }
             if (prod.Id == 0)
             {
-                while (prod.Id == 0) 
-                {
-                    Random random = new Random();
-                    int newID = random.Next(items.Count() + 1);
-                    foreach (var item in items)
-                    {
-                        if(item.Product.Id == newID)
-                        {
-                            newID = 0;
-                        }
-                    }
-                    prod.Id = newID;
-                }
+
+                int newID = items.Count() + 1;
+                prod.Id = newID;
+                
             }
             StoreItem addedItem = new StoreItem(prod, quantity);
             items.Add(addedItem);

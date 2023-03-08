@@ -16,5 +16,13 @@ namespace CKK.UI2
         {
             InitializeComponent();
         }
+
+        private void AddSubmitButton_Click(object sender, EventArgs e)
+        {
+            if (AddProductNameBox.Text != "" & AddQuantityBox.Text != "" & AddPriceBox.Text != "")
+            {
+                
+            }
+        }
     }
 }

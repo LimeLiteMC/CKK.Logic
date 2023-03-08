@@ -101,6 +101,7 @@ namespace CKK.UI2
             this.AddSubmitButton.TabIndex = 12;
             this.AddSubmitButton.Text = "Submit";
             this.AddSubmitButton.UseVisualStyleBackColor = true;
+            this.AddSubmitButton.Click += new System.EventHandler(this.AddSubmitButton_Click);
             // 
             // AddItemForm
             // 

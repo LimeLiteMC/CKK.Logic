@@ -101,6 +101,7 @@ namespace CKK.UI2
             this.RemSubmitButton.TabIndex = 6;
             this.RemSubmitButton.Text = "Submit";
             this.RemSubmitButton.UseVisualStyleBackColor = true;
+            this.RemSubmitButton.Click += new System.EventHandler(this.RemSubmitButton_Click);
             // 
             // RemoveItemForm
             // 

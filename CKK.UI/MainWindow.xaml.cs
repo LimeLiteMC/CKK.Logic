@@ -12,12 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CKK.Logic;
+using CKK.Logic.Interfaces;
+using CKK.Logic.Models;
 
 namespace CKK.UI
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -27,14 +27,16 @@ namespace CKK.UI
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            Store tp = (Store)Application.Current.FindResource("globStore");
             string username = UsernameBox.Text;
             string actualUser = "Otech";
             string password = PasswordBox.Password;
             string actualPassword = "OWATC";
             if (username == actualUser & password == actualPassword)
             {
-                InterfaceWindow test = new InterfaceWindow();
+                InterfaceWindow test = new InterfaceWindow(tp);
                 test.Show();
+                this.Close();
             }
             else
             {

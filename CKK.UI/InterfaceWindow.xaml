@@ -3,21 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CKK.UI"
+        xmlns:local = "clr-namespace:CKK.UI"
         mc:Ignorable="d"
-        Title="Corey's Knick Knacks Inventory" Height="450" Width="800">
-    <Grid Background="AliceBlue" MinHeight="450" MinWidth="4">
-        <DockPanel>
-            <ListBox x:Name="ListBox" DockPanel.Dock="Bottom" Margin="0,103,0,10" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="327" ItemsSource="{Binding _Items}" DisplayMemberPath="Text">
+        
+        Title="Corey's Knick Knacks Inventory" SizeToContent="WidthAndHeight" Width="989">
+
+    <Grid Background="AliceBlue" MinHeight="450" MinWidth="4" Height="541">
+
+        <DockPanel x:Name="InterfaceWin" Grid.ColumnSpan="5">
+            <ListBox x:Name="ListBox" DockPanel.Dock="Bottom" Margin="5,0,5,5" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto"  DisplayMemberPath="Text" Height="441" Width="Auto" RenderTransformOrigin="0.5,0.5">
+                <ListBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ListBox.RenderTransform>
                 <ListBox.BindingGroup>
                     <BindingGroup/>
                 </ListBox.BindingGroup>
-
             </ListBox>
+
+            <Button x:Name="NewButton" Content="New+" FontSize="15" Click="NewButton_Click_1" Margin="20,20,20,20" MaxHeight="37" MaxWidth="69" MinHeight="37" MinWidth="69" DockPanel.Dock="Right" Width="69"/>
+            <TextBox x:Name="SearchBox" Text="Search" FontSize="13" TextWrapping="Wrap" Margin="10,0,0,0" MinHeight="18" MinWidth="102" MaxWidth="102" MaxHeight="18" DockPanel.Dock="Left" Width="100" Height="33"/>
+            <Button x:Name="RemoveButton" Content="Remove-" FontSize="15" Margin="20,20,20,20" MaxHeight="37" MaxWidth="80" MinHeight="37" MinWidth="80" Click="RemoveButton_Click" DockPanel.Dock="Left" Width="80" Height="48"/>
         </DockPanel>
-        <Button x:Name="NewButton" Content="New+" FontSize="15" Margin="491,32,0,0" Click="NewButton_Click_1" MaxHeight="37" MaxWidth="69" MinHeight="37" MinWidth="69" HorizontalAlignment="Left" Width="69" Height="37" VerticalAlignment="Top"/>
-        <TextBox x:Name="SearchBox" Text="Search" FontSize="13" TextWrapping="Wrap" Margin="658,42,0,0" MinHeight="18" MinWidth="102" MaxWidth="102" MaxHeight="18" Height="18" VerticalAlignment="Top" HorizontalAlignment="Left" Width="102"/>
-        <Button x:Name="RemoveButton" Content="Remove-" FontSize="15" Margin="366,32,0,0" MaxHeight="37" MaxWidth="80" MinHeight="37" MinWidth="80" Height="37" VerticalAlignment="Top" HorizontalAlignment="Left" Width="80" Click="RemoveButton_Click"/>
     </Grid>
 
 </Window>
