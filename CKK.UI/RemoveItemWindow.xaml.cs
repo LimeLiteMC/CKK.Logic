@@ -25,6 +25,7 @@ namespace CKK.UI
         private IStore _Store;
         public RemoveItemWindow(IStore store)
         {
+            _Store = store;
             InitializeComponent();
             Store tp = (Store)Application.Current.FindResource("globStore");
         }
@@ -34,6 +35,7 @@ namespace CKK.UI
             _Store.DeleteStoreItem(int.Parse(IDBox.Text));
             InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
             updatedInventory.Show();
+            this.Close();
         }
 
         private void RemoveItemButton_Click(object sender, RoutedEventArgs e)
@@ -41,12 +43,14 @@ namespace CKK.UI
             _Store.RemoveStoreItem(int.Parse(IDBox.Text),int.Parse(QuantityBox.Text));
             InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
             updatedInventory.Show();
+            this.Close();
         }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
             InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
             updatedInventory.Show();
+            this.Close();
         }
     }
 }

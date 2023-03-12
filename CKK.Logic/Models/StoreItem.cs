@@ -7,6 +7,7 @@ using CKK.Logic.Interfaces;
 
 namespace CKK.Logic.Models
 {
+    [Serializable]
     public class StoreItem : InventoryItem
     {
         public StoreItem(Product product, int quantity)
@@ -14,9 +15,9 @@ namespace CKK.Logic.Models
             Product = product;
             Quantity = quantity;
         }
-        public string ToString(StoreItem store_Item)
+        public string ToString()
         {
-            return $"{store_Item.Product.Name} {store_Item.Product.Id} {store_Item.Product.Price} {store_Item.Quantity}";
+            return $"Name: {Product.Name}          Product ID: {Product.Id}          Price: {Product.Price}          Inventory: {Quantity}";
         }
     }
 }

@@ -11,10 +11,10 @@
     <Grid Background="AliceBlue" MinHeight="450" MinWidth="4" Height="541">
 
         <DockPanel x:Name="InterfaceWin" Grid.ColumnSpan="5">
-            <ListBox x:Name="ListBox" DockPanel.Dock="Bottom" Margin="5,0,5,5" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto"  DisplayMemberPath="Text" Height="441" Width="Auto" RenderTransformOrigin="0.5,0.5">
+            <ListBox x:Name="ListBox" DockPanel.Dock="Bottom" Margin="5,0,5,5" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="415" Width="Auto" RenderTransformOrigin="0.5,0.5">
                 <ListBox.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform ScaleY="-1"/>
+                        <ScaleTransform ScaleY="1"/>
                         <SkewTransform/>
                         <RotateTransform/>
                         <TranslateTransform/>

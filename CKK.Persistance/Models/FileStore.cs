@@ -4,14 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CKK.Logic.Interfaces;
+using CKK.Logic.Models;
+using CKK.Persistance.Interfaces;
+using CKK.Persistance.Models;
 using CKK.Logic.Exceptions;
+using CKK.Tests;
+using System.IO;
 
-namespace CKK.Logic.Models
+namespace CKK.Persistance.Models
 {
-    public class Store : Entity, IStore
+    class FileStore : IStore, ISavable, ILoadable
     {
-        List<StoreItem> items = new List<StoreItem>();
+        List<StoreItem> Items;
+        int IdCounter;
+        public string FilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+ @"\Persistance\StoreItems.dat"; 
 
+        static void Main()
+        {
+            CreatePath();
+        }
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
             if (quantity < 0)
@@ -23,7 +34,7 @@ namespace CKK.Logic.Models
             {
                 return null;
             }
-            foreach (var item in items)
+            foreach (var item in Items)
             {
                 if (item.Product == prod)
                 {
@@ -34,12 +45,12 @@ namespace CKK.Logic.Models
             if (prod.Id == 0)
             {
 
-                int newID = items.Count() + 1;
+                int newID = Items.Count() + 1;
                 prod.Id = newID;
-                
+
             }
             StoreItem addedItem = new StoreItem(prod, quantity);
-            items.Add(addedItem);
+            Items.Add(addedItem);
             return addedItem;
         }
         public StoreItem RemoveStoreItem(int id, int quantity)
@@ -57,10 +68,10 @@ namespace CKK.Logic.Models
                 return null;
             }
             var removedItem =
-                from item in items
+                from item in Items
                 where item.Product.Id == id
                 let removal = item.Quantity - quantity
-                select new {item, removal};
+                select new { item, removal };
             if (removedItem.First().removal <= 0)
             {
                 removedItem.First().item.Quantity = 0;
@@ -76,15 +87,11 @@ namespace CKK.Logic.Models
                 else
                 {
                     item.item.Quantity = 0;
-                    items.Add(new StoreItem(item.item.Product, 0));
+                    Items.Add(new StoreItem(item.item.Product, 0));
                     return item.item;
                 }
             }
             return null;
-        }
-        public List<StoreItem> GetStoreItems()
-        {
-            return items;
         }
         public StoreItem FindStoreItemById(int id)
         {
@@ -93,7 +100,7 @@ namespace CKK.Logic.Models
                 throw new InvalidIdException("ID cannot be 0 or less.");
             }
             var itemById =
-                from item in items
+                from item in Items
                 where item.Product.Id == id
                 select item;
             foreach (var item in itemById)
@@ -111,20 +118,30 @@ namespace CKK.Logic.Models
         }
         public void DeleteStoreItem(int id)
         {
-            List<StoreItem> temporaryItems = new List<StoreItem>();
-            foreach (var item in items)
+            foreach (var item in Items)
             {
                 if (item.Product.Id == id)
                 {
-                    
-                }
-                else
-                {
-                    temporaryItems.Add(item);
+                    Items.Remove(item);
                 }
             }
-            items = temporaryItems;
         }
+        public List<StoreItem> GetStoreItems()
+        {
+            return Items;
+        }
+        public void Load()
+        {
 
+        }
+        public void Save()
+        {
+
+        }
+        static void CreatePath()
+        {
+            System.IO.FileStream NewFolder = System.IO.File.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Persistance\StoreItems.dat");
+            
+        }
     }
 }

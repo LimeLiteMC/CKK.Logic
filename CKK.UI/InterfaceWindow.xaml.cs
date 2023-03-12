@@ -23,12 +23,12 @@ namespace CKK.UI
     {
         private IStore _Store;
 
-        public ObservableCollection<StoreItem> _Items { get; private set; }
+        public ObservableCollection<string> _Items { get; private set; }
         public InterfaceWindow(Store store)
         {
             _Store = store;
             InitializeComponent();
-            _Items = new ObservableCollection<StoreItem>();
+            _Items = new ObservableCollection<string>();
             ListBox.ItemsSource = _Items;
             RefreshList();
         }
@@ -36,7 +36,7 @@ namespace CKK.UI
         {
             _Store = store;
             InitializeComponent();
-            _Items = new ObservableCollection<StoreItem>();
+            _Items = new ObservableCollection<string>();
             ListBox.ItemsSource = _Items;
             RefreshList();
         }
@@ -45,7 +45,7 @@ namespace CKK.UI
             _Items.Clear();
             foreach (StoreItem si in new ObservableCollection<StoreItem>(_Store.GetStoreItems()))
             {
-                _Items.Add(si);
+                _Items.Add(si.ToString());
             }
         }
 
