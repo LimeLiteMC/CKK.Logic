@@ -17,7 +17,7 @@ namespace CKK.Logic.Models
         }
         public string ToString()
         {
-            return $"Name: {Product.Name}          Product ID: {Product.Id}          Price: {Product.Price}          Inventory: {Quantity}";
+            return $"Name: {Product.Name}          Product ID: {Product.Id}          Price: ${Product.Price}          Inventory: {Quantity}";
         }
     }
 }
