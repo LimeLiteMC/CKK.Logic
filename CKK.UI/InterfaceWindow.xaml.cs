@@ -15,25 +15,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using CKK.Logic.Interfaces;
 using CKK.Logic.Models;
+using CKK.Persistance.Models;
 
 namespace CKK.UI
 {
 
     public partial class InterfaceWindow : Window
     {
-        private IStore _Store;
+        private FileStore _Store;
 
         public ObservableCollection<string> _Items { get; private set; }
-        public InterfaceWindow(Store store)
+        public InterfaceWindow(FileStore store)
         {
-            _Store = store;
-            InitializeComponent();
-            _Items = new ObservableCollection<string>();
-            ListBox.ItemsSource = _Items;
-            RefreshList();
-        }
-        public InterfaceWindow(IStore store)
-        {
+            store.Load();
             _Store = store;
             InitializeComponent();
             _Items = new ObservableCollection<string>();

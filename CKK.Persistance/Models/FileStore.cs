@@ -10,18 +10,19 @@ using CKK.Persistance.Models;
 using CKK.Logic.Exceptions;
 using CKK.Tests;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace CKK.Persistance.Models
 {
-    class FileStore : IStore, ISavable, ILoadable
+    public class FileStore : IStore, ISavable, ILoadable
     {
-        List<StoreItem> Items;
+        List<StoreItem> Items = new List<StoreItem>();
         int IdCounter;
         public string FilePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+ @"\Persistance\StoreItems.dat"; 
-
-        static void Main()
+        public FileStore()
         {
-            CreatePath();
+            CreatePath();    
         }
         public StoreItem AddStoreItem(Product prod, int quantity)
         {
@@ -51,6 +52,7 @@ namespace CKK.Persistance.Models
             }
             StoreItem addedItem = new StoreItem(prod, quantity);
             Items.Add(addedItem);
+            
             return addedItem;
         }
         public StoreItem RemoveStoreItem(int id, int quantity)
@@ -118,11 +120,11 @@ namespace CKK.Persistance.Models
         }
         public void DeleteStoreItem(int id)
         {
-            foreach (var item in Items)
+            for (int item = 0; item < Items.Count; item++)
             {
-                if (item.Product.Id == id)
+                if (Items[item].Product.Id == id)
                 {
-                    Items.Remove(item);
+                    Items.Remove(Items[item]);
                 }
             }
         }
@@ -132,16 +134,35 @@ namespace CKK.Persistance.Models
         }
         public void Load()
         {
-
+            BinaryFormatter formatedFile = new BinaryFormatter();
+            FileStream fs = new FileStream(FilePath, FileMode.Open);
+            byte[] data = new byte[fs.Length];
+            if (fs.Length != 0)
+            {
+                Items = (List<StoreItem>)formatedFile.Deserialize(fs);
+            }
+            
         }
         public void Save()
         {
 
+            BinaryFormatter formatedFile = new BinaryFormatter();
+            FileStream fs = new FileStream(FilePath, FileMode.Open);
+            formatedFile.Serialize(fs, Items);
+            fs.Close();
+            
         }
         static void CreatePath()
         {
-            System.IO.FileStream NewFolder = System.IO.File.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Persistance\StoreItems.dat");
-            
+            if (System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Persistance\StoreItems.dat"))
+            {
+                
+            }
+            else
+            {
+                System.IO.FileStream NewFolder = System.IO.File.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Persistance\StoreItems.dat");
+                NewFolder.Close();
+            }
         }
     }
 }

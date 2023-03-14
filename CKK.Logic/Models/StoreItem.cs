@@ -15,7 +15,7 @@ namespace CKK.Logic.Models
             Product = product;
             Quantity = quantity;
         }
-        public string ToString()
+        public override string ToString()
         {
             return $"Name: {Product.Name}          Product ID: {Product.Id}          Price: ${Product.Price}          Inventory: {Quantity}";
         }

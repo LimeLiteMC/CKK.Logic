@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using CKK.Logic;
 using CKK.Logic.Interfaces;
 using CKK.Logic.Models;
+using CKK.Persistance;
+using CKK.Persistance.Models;
 
 namespace CKK.UI
 {
@@ -22,17 +24,18 @@ namespace CKK.UI
     /// </summary>
     public partial class RemoveItemWindow : Window
     {
-        private IStore _Store;
-        public RemoveItemWindow(IStore store)
+        private FileStore _Store;
+        public RemoveItemWindow(FileStore store)
         {
             _Store = store;
             InitializeComponent();
-            Store tp = (Store)Application.Current.FindResource("globStore");
+            FileStore tp = (FileStore)Application.Current.FindResource("globStore");
         }
 
         private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
         {
             _Store.DeleteStoreItem(int.Parse(IDBox.Text));
+            _Store.Save();
             InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
             updatedInventory.Show();
             this.Close();
@@ -41,6 +44,7 @@ namespace CKK.UI
         private void RemoveItemButton_Click(object sender, RoutedEventArgs e)
         {
             _Store.RemoveStoreItem(int.Parse(IDBox.Text),int.Parse(QuantityBox.Text));
+            _Store.Save();
             InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
             updatedInventory.Show();
             this.Close();
