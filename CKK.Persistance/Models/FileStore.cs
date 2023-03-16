@@ -164,5 +164,54 @@ namespace CKK.Persistance.Models
                 NewFolder.Close();
             }
         }
+
+        public List<StoreItem> GetAllProductsByName(string name)
+        {
+            List<StoreItem> itemNames = new List<StoreItem>();
+            foreach (var item in Items)
+            {
+                if (item.Product.Name == name)
+                {
+                    itemNames.Add(item);
+                }
+            }
+            return itemNames;
+        }
+
+        public List<StoreItem> GetProductsByQuantity()
+        {
+            List<StoreItem> itemQuantities = Items;
+            for (int i = 0; i < itemQuantities.Count-1; i++)
+            {
+                var variable1 = itemQuantities[i];
+                var variable2 = itemQuantities[i+1];
+                if (variable1.Quantity > variable2.Quantity)
+                {
+                    itemQuantities[i] = variable2;
+                    itemQuantities[i + 1] = variable1;
+                    i = 0;
+                }
+            }
+            Items = itemQuantities;
+            return Items;
+        }
+
+        public List<StoreItem> GetProductsByPrice()
+        {
+            List<StoreItem> itemPrice = Items;
+            for (int i = 0; i < itemPrice.Count - 1; i++)
+            {
+                var variable1 = itemPrice[i];
+                var variable2 = itemPrice[i + 1];
+                if (variable1.Product.Price > variable2.Product.Price)
+                {
+                    itemPrice[i] = variable2;
+                    itemPrice[i + 1] = variable1;
+                    i = 0;
+                }
+            }
+            Items = itemPrice;
+            return Items;
+        }
     }
 }

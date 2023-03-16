@@ -8,10 +8,10 @@
         
         Title="Corey's Knick Knacks Inventory" SizeToContent="WidthAndHeight" Width="989">
 
-    <Grid Background="AliceBlue" MinHeight="450" MinWidth="4" Height="541">
+    <Grid Background="AliceBlue" MinHeight="450" MinWidth="400" Height="576" Margin="0,0,0,0">
 
-        <DockPanel x:Name="InterfaceWin" Grid.ColumnSpan="5">
-            <ListBox x:Name="ListBox" DockPanel.Dock="Bottom" Margin="5,0,5,5" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="415" Width="Auto" RenderTransformOrigin="0.5,0.5">
+        <DockPanel x:Name="InterfaceWin" Margin="0,86,0,0">
+            <ListBox x:Name="ListBox" DockPanel.Dock="Bottom" Margin="5,0,5,5" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="483" Width="Auto" RenderTransformOrigin="0.5,0.5">
                 <ListBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"/>
@@ -24,10 +24,14 @@
                     <BindingGroup/>
                 </ListBox.BindingGroup>
             </ListBox>
-
-            <Button x:Name="NewButton" Content="New+" FontSize="15" Click="NewButton_Click_1" Margin="20,20,20,20" MaxHeight="37" MaxWidth="69" MinHeight="37" MinWidth="69" DockPanel.Dock="Right" Width="69"/>
-            <TextBox x:Name="SearchBox" Text="Search" FontSize="13" TextWrapping="Wrap" Margin="10,0,0,0" MinHeight="18" MinWidth="102" MaxWidth="102" MaxHeight="18" DockPanel.Dock="Left" Width="100" Height="33"/>
-            <Button x:Name="RemoveButton" Content="Remove-" FontSize="15" Margin="20,20,20,20" MaxHeight="37" MaxWidth="80" MinHeight="37" MinWidth="80" Click="RemoveButton_Click" DockPanel.Dock="Left" Width="80" Height="48"/>
+        </DockPanel>
+        <DockPanel Margin="0,-4,0,495">
+            <Button x:Name="NewButton" Content="New+" FontSize="15" Click="NewButton_Click_1" Margin="20,20,20,20" MaxHeight="37" MaxWidth="69" MinHeight="37" MinWidth="69" DockPanel.Dock="Right" Width="69" Height="31"/>
+            <TextBox x:Name="SearchBox" Text="Search" FontSize="13" TextWrapping="Wrap" Margin="20,20,20,20" MinHeight="18" MinWidth="102" MaxWidth="102" MaxHeight="18" DockPanel.Dock="Left" Width="74" Height="33"/>
+            <Button x:Name="SearchButton" Content="Search" FontSize="15" MaxHeight="37" MaxWidth="80" MinHeight="37" MinWidth="80" Click="SearchButton_Click" DockPanel.Dock="Left" Width="80" Margin="20,20,20,20" Height="41"/>
+            <RadioButton x:Name="SortByQuantityRadioButton" Content="Sort By Quantity" Width="112" Height="18" Margin ="0,0,0,0" Checked="SortByQuantityRadioButton_Checked"/>
+            <RadioButton x:Name="SortByPriceRadioButton" Content="Sort By Price" Width="96" Height="16" Checked="SortByPriceRadioButton_Checked"/>
+            <Button x:Name="RemoveButton" Content="Remove-" FontSize="15" MaxHeight="37" MaxWidth="80" MinHeight="37" MinWidth="80" Click="RemoveButton_Click"  DockPanel.Dock="Top"  Width="80" Margin="20,20,20,20" Height="41"/>
         </DockPanel>
     </Grid>
 

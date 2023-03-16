@@ -52,6 +52,7 @@ namespace CKK.UI
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
+            _Store.Save();
             InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
             updatedInventory.Show();
             this.Close();

@@ -49,11 +49,40 @@ namespace CKK.UI
             NewItemWindow.Show();
             this.Close();
         }
+
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
         {
             RemoveItemWindow removeWindow = new RemoveItemWindow(_Store);
             removeWindow.Show();
             this.Close();
+        }
+
+        private void SortByPriceRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            _Store.GetProductsByPrice();
+            RefreshList();
+        }
+
+        private void SortByQuantityRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            _Store.GetProductsByQuantity();
+            RefreshList();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SearchBox.Text != "")
+            {
+                _Items.Clear();
+                foreach (StoreItem si in new ObservableCollection<StoreItem>(_Store.GetAllProductsByName(SearchBox.Text)))
+                {
+                    _Items.Add(si.ToString());
+                }
+            }
+            else
+            {
+                RefreshList();
+            }
         }
     }
 }
