@@ -10,11 +10,7 @@ namespace CKK.Logic.Models
 {
     public class ShoppingCart :IShoppingCart
     {
-        public Customer Customer 
-        {
-            get;
-            set;
-        }
+        public Customer Customer { get; set; }
 
         public List<ShoppingCartItem> Products = new List<ShoppingCartItem>();
 
@@ -22,6 +18,10 @@ namespace CKK.Logic.Models
         {
             Customer = cust;
         }
+
+        public int ShoppingCartID { get; set; }
+        public int CustomerID { get; set; }
+        public List<ShoppingCartItem> ShoppingCartItems { get; set; } = new List<ShoppingCartItem>();
 
         public int GetCustomerId()
         {

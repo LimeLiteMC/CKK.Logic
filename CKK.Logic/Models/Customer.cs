@@ -22,7 +22,8 @@ namespace CKK.Logic.Models
                 address = value;
             }
         }
-
+        public int CustomerId { get; set; }
+        public int ShoppingCartId {  get; set; }
+        public ShoppingCart Cart { get; set; }
     }
-
 }
