@@ -11,15 +11,29 @@ namespace CKK.Logic.Models
     public class ShoppingCartItem : InventoryItem
     {
 
-        public ShoppingCartItem(Product product, int quantity)
+        public Product Product { get; set; }
+        public int ShoppingCartId { get; set; }
+        public int CustomerId {  get; set; }
+        public int ProductId { get; set; }
+        private int quantity {  get; set; }
+        public int Quantity
         {
-            Quantity = quantity;
-            Product = product;
+            get { return quantity; }
+            set { 
+                if(value >= 0)
+                {
+                    quantity = value;
+                } 
+                else
+                {
+                    throw new InventoryItemStockTooLowException();
+                }
+                }
         }
         public decimal GetTotal()
         {
-            decimal total = Product.Price * Quantity;
-            return total;
+            return Product.Price * Quantity;
         }
+
     }
 }
