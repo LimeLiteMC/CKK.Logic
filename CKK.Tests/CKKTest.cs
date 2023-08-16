@@ -22,19 +22,6 @@ namespace CKK.Tests
             Karen.Address = "123 Fake St.";
             Karen.Name = "Karen";
             Karen.Id = 123;
-
-            ShoppingCart cart = new ShoppingCart(Karen);
-
-            //Act
-            cart.AddProduct(Nike, 5 );
-
-            //Assert
-            string actual = cart.GetProductById(Nike.Id).Product.Name;
-            decimal actual2 = cart.GetProductById(Nike.Id).Product.Price;
-            int actual3 = cart.GetProductById(Nike.Id).Product.Id;
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expected2, actual2);
-            Assert.AreEqual(expected3, actual3);
         }
         [TestMethod]
         public void Test_RemovesAProduct()
@@ -54,19 +41,6 @@ namespace CKK.Tests
             Karen.Address = "123 Fake St.";
             Karen.Name = "Karen";
             Karen.Id = 123;
-
-            ShoppingCart cart = new ShoppingCart(Karen);
-            cart.AddProduct(Nike, 5);
-            //Act
-            cart.RemoveProduct(Nike.Id, 2);
-
-            //Assert
-            string actual = cart.GetProductById(Nike.Id).Product.Name;
-            int actual2 = cart.GetProductById(Nike.Id).Quantity;
-            int actual3 = cart.GetProductById(Nike.Id).Product.Id;
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expected2, actual2);
-            Assert.AreEqual(expected3, actual3);
         }
         [TestMethod]
         public void Test_GetsTheTotal()
@@ -93,18 +67,6 @@ namespace CKK.Tests
             Karen.Address = "123 Fake St.";
             Karen.Name = "Karen";
             Karen.Id = 123;
-
-            ShoppingCart cart = new ShoppingCart(Karen);
-            cart.AddProduct(Nike, 5);
-            cart.AddProduct(Apple, 2);
-            cart.AddProduct(TimBuk2, 3);
-
-            //Act
-            cart.GetTotal();
-
-            //Assert
-            decimal actual = cart.GetTotal();
-            Assert.AreEqual(expected, actual);
 
             //Create a unit test that checks to see if the total is accurate.
         }

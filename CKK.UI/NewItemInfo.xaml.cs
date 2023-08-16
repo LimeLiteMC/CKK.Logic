@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 using CKK.Logic.Interfaces;
 using CKK.Logic.Models;
 using CKK.Persistance;
-using CKK.Persistance.Models;
 
 
 
@@ -24,23 +23,12 @@ namespace CKK.UI
 {
     public partial class NewItemInfo : Window
     {
-        private FileStore _Store;
-        public NewItemInfo(FileStore store)
-        {
-            _Store = store;
-            InitializeComponent();
-        }
-
         private void SubmitItemButton_Click(object sender, RoutedEventArgs e)
         {
             Product newProduct = new Product();
             newProduct.Name = NameBox.Text;
             newProduct.Price = decimal.Parse(PriceBox.Text);
             newProduct.Id = 0;
-            _Store.AddStoreItem(newProduct, int.Parse(QuantityBox.Text));
-            _Store.Save();
-            InterfaceWindow updatedInventory = new InterfaceWindow(_Store);
-            updatedInventory.Show();
             this.Close();
         }
     }
