@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CKK.Logic\CKK.DB\CKK.DB.csproj" />
+    <ProjectReference Include="..\..\CKK.Logic\CKK.Logic\CKK.Logic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CKK.Logic">
+      <HintPath>..\..\CKK.Logic\CKK.Logic\bin\Debug\net5.0\CKK.Logic.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
