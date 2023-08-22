@@ -19,23 +19,23 @@ namespace CKK.DB.Repository
         }
         public int Add(Order entity)
         {
-            var sql = "Insert into Orders (OrderNumber, CustomerId, ShoppingCartId) VALUES (@OrderNumber, @CustomerId, @ShoppingCartId)";
+            var sql = "Insert into Orders (OrderNumber, CustomerId, ShoppingCartId, OrderId) VALUES (@OrderNumber, @CustomerId, @ShoppingCartId, @OrderId)";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, entity);
-                return result;
+                connection.Execute(sql, entity);
+                return 1;
             }
         }
 
         public int Delete(int id)
         {
-            var sql = "DELETE * FROM Orders WHERE OrderId = @id";
+            var sql = "DELETE FROM Orders WHERE OrderId = @Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql);
-                return result;
+                connection.Execute(sql, new {Id = id});
+                return 1;
             }
         }
 

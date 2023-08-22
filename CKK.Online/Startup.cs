@@ -1,3 +1,5 @@
+using CKK.DB.Interfaces;
+using CKK.DB.UOW;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +26,14 @@ namespace CKK.Online
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<DatabaseConnectionFactory>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>(sp =>
+            {
+                var factory = sp.GetRequiredService<DatabaseConnectionFactory>();
+                return new UnitOfWork(factory);
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

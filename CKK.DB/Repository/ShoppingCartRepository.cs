@@ -30,12 +30,12 @@ namespace CKK.DB.Repository
 
         public int ClearCart(int shoppingCartId)
         {
-            var sql = "DELETE FROM ShoppingCartItems WHERE Id = @shoppingCartId";
+            var sql = "DELETE FROM ShoppingCartItems WHERE Id = @ShoppingCartId";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql);
-                return result;
+                connection.Execute(sql, new {ShoppingCartId = shoppingCartId});
+                return 1;
             }
         }
 

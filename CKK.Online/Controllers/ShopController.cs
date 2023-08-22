@@ -13,7 +13,7 @@ namespace CKK.Online.Controllers
     public class ShopController : Controller
     {
         private readonly IUnitOfWork _passedUnit;
-        ShopController(IUnitOfWork unit)
+        public ShopController(IUnitOfWork unit)
         {
             _passedUnit = unit;
         }

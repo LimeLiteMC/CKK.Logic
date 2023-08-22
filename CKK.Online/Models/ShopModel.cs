@@ -11,8 +11,21 @@ namespace CKK.Online.Models
         public IUnitOfWork UOW { get; set; }
         public ShopModel(IUnitOfWork work)
         {
-            UOW = work;
-            UOW.Orders.Add(Order);
+            if (Order == null)
+            {
+                Order = new Order();
+                Order.OrderNumber = "1";
+                Order.OrderId = 1;
+                Order.ShoppingCartId = 100;
+                UOW = work;
+                UOW.Orders.Delete(Order.OrderId);
+                UOW.Orders.Add(Order);
+            }
+            else
+            {
+                UOW = work;
+                UOW.Orders.Add(Order);
+            }
         }
     }
 }
