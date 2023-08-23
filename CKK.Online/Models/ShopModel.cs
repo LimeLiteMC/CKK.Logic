@@ -11,7 +11,7 @@ namespace CKK.Online.Models
         public IUnitOfWork UOW { get; set; }
         public ShopModel(IUnitOfWork work)
         {
-            if (Order == null ||)
+            if (Order == null || UOW.Orders == Order)
             {
                 Order = new Order();
                 Order.OrderNumber = "1";
