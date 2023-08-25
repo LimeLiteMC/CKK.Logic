@@ -20,9 +20,11 @@ namespace CKK.DB.Repository
         public int Add(Order entity)
         {
             var sql = "Insert into Orders (OrderNumber, CustomerId, ShoppingCartId, OrderId) VALUES (@OrderNumber, @CustomerId, @ShoppingCartId, @OrderId)";
+            var sqlDelete = "DELETE FROM Orders WHERE OrderId = @OrderId";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
+                connection.Execute(sqlDelete, entity);
                 connection.Execute(sql, entity);
                 return 1;
             }
@@ -56,33 +58,34 @@ namespace CKK.DB.Repository
 
         public Order GetById(int id)
         {
-            var sql = "SELECT * FROM Orders WHERE OrderId = @id";
+            var sql = "SELECT * FROM Orders WHERE OrderId = @Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.QuerySingleOrDefault(sql);
-                return result;
+                var result = connection.QuerySingleOrDefault(sql, new {Id = id});
+                Order Result = result.FirstOrDefault();
+                return Result;
             }
         }
 
         public Order GetOrderByCustomerID(int id)
         {
-            var sql = "SELECT * FROM Orders WHERE CustomerId = @id";
+            var sql = "SELECT * FROM Orders WHERE CustomerId = @Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.QuerySingleOrDefault(sql);
+                var result = connection.QuerySingleOrDefault(sql, new {Id = id});
                 return result;
             }
         }
 
         public int Update(Order entity)
         {
-            var sql = "UPDATE Orders SET OrderNumber = @entity.OrderNumber, CustomerId = @entity.CustomerId, ShoppingCartId = @entity.ShoppingCartId WHERE Id = @entity.OrderId";
+            var sql = "UPDATE Orders SET OrderNumber = @Entity.OrderNumber, CustomerId = @Entity.CustomerId, ShoppingCartId = @Entity.ShoppingCartId WHERE Id = @Entity.OrderId";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, entity);
+                var result = connection.Execute(sql, new { Entity = entity });
                 return result;
             }
         }

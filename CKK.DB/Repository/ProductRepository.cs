@@ -44,12 +44,8 @@ namespace CKK.DB.Repository
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                List<Product> result = new List<Product>();
-                foreach (var i in connection.Query(sql))
-                {
-                    result.Add(i);
-                }
-                return result;
+                var result = connection.Query<Product>(sql);
+                return result.ToList();
             }
         }
 
@@ -59,8 +55,9 @@ namespace CKK.DB.Repository
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.QuerySingleOrDefault(sql);
-                return result;
+                var result = connection.QuerySingleOrDefault(sql, new {Id = id});
+                Product Result = result.FirstOrDefault();
+                return Result;
             }
         }
 

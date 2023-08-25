@@ -37,8 +37,9 @@ namespace CKK.Online.Controllers
         [Route("Shop/ShoppingCart/Add/{productId}")]
         public IActionResult Add([FromRoute] int productId, [FromQuery] int quantity)
         {
-            var order = _passedUnit.Orders.GetById(1);
-            var test = _passedUnit.ShoppingCarts.AddToCart(order.ShoppingCartId, productId, quantity);
+            var product = _passedUnit.Products.GetById(productId);
+            var order = _passedUnit.Orders.GetById(productId);
+            _passedUnit.ShoppingCarts.AddToCart(order.ShoppingCartId, productId, quantity);
             var total = _passedUnit.ShoppingCarts.GetTotal(order.ShoppingCartId).ToString("c");
             return Ok(total);
         }

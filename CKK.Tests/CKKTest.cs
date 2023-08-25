@@ -21,7 +21,6 @@ namespace CKK.Tests
             Customer Karen = new Customer();
             Karen.Address = "123 Fake St.";
             Karen.Name = "Karen";
-            Karen.Id = 123;
         }
         [TestMethod]
         public void Test_RemovesAProduct()
@@ -40,7 +39,6 @@ namespace CKK.Tests
             Customer Karen = new Customer();
             Karen.Address = "123 Fake St.";
             Karen.Name = "Karen";
-            Karen.Id = 123;
         }
         [TestMethod]
         public void Test_GetsTheTotal()
@@ -66,7 +64,7 @@ namespace CKK.Tests
             Customer Karen = new Customer();
             Karen.Address = "123 Fake St.";
             Karen.Name = "Karen";
-            Karen.Id = 123;
+
 
             //Create a unit test that checks to see if the total is accurate.
         }
