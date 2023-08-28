@@ -23,7 +23,7 @@ namespace CKK.DB.Repository
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.QuerySingleOrDefault(sql);
+                var result = connection.QuerySingleOrDefault(sql, new {ShoppingCartId = ShoppingCartId, ProductId = ProductId, quantity = quantity});
                 return result;
             }
         }
@@ -41,23 +41,27 @@ namespace CKK.DB.Repository
 
         public List<ShoppingCartItem> GetProducts(int shoppingCartId)
         {
-            var sql = "SELECT * FROM ShoppingCartItems WHERE Name = @shoppingCartId";
+            var sql = "SELECT * FROM ShoppingCartItems WHERE ShoppingCartId = @shoppingCartId";
             using (var connections = _connectionFactory.GetConnection)
             {
                 connections.Open();
-                var result = connections.QuerySingleOrDefault(sql);
+                var result = connections.QuerySingleOrDefault(sql, new {shoppingCartId = shoppingCartId});
                 return result;
             }
         }
 
         public decimal GetTotal(int ShoppingCartId)
         {
-            var sql = "SELECT SUM(Price) FROM ShoppingCartItems WHERE Id = @ShoppingCartId";
+            var sql = "SELECT SUM(Price) FROM Products WHERE Id IN (SELECT ProductId FROM ShoppingCartItems WHERE ShoppingCartId = @ShoppingCartId)";
             using (var connections = _connectionFactory.GetConnection)
             {
                 connections.Open();
-                var result = connections.QuerySingleOrDefault(sql);
-                return result;
+                var result = connections.Query<decimal>(sql, new {ShoppingCartId = ShoppingCartId});
+                foreach (var item in result)
+                {
+                    return item;
+                }
+                return 1;
             }
         }
 
@@ -67,7 +71,7 @@ namespace CKK.DB.Repository
             using (var connections = _connectionFactory.GetConnection)
             {
                 connections.Open();
-                connections.QuerySingleOrDefault(sql);
+                connections.QuerySingleOrDefault(sql, shoppingCartId = shoppingCartId);
             }
         }
     }

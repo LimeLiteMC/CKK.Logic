@@ -62,9 +62,12 @@ namespace CKK.DB.Repository
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.QuerySingleOrDefault(sql, new {Id = id});
-                Order Result = result.FirstOrDefault();
-                return Result;
+                var result = connection.Query<Order>(sql, new {Id = id});
+                foreach (var row in result)
+                {
+                    return row;
+                }
+                return null;
             }
         }
 
@@ -74,7 +77,7 @@ namespace CKK.DB.Repository
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.QuerySingleOrDefault(sql, new {Id = id});
+                var result = (Order)connection.QuerySingleOrDefault(sql, new {Id = id});
                 return result;
             }
         }
@@ -85,7 +88,7 @@ namespace CKK.DB.Repository
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, new { Entity = entity });
+                var result = (int)connection.Execute(sql, new { Entity = entity });
                 return result;
             }
         }

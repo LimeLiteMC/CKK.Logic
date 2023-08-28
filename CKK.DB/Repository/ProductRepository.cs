@@ -22,18 +22,18 @@ namespace CKK.DB.Repository
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, entity);
+                var result = connection.Execute(sql, new { Entity = entity });
                 return result;
             }
         }
 
         public int Delete(int id)
         {
-            var sql = "DELETE * FROM Products WHERE id = @id";
+            var sql = "DELETE * FROM Products WHERE id = @Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql);
+                var result = connection.Execute(sql, new {Id = id});
                 return result;
             }
         }
@@ -63,11 +63,11 @@ namespace CKK.DB.Repository
 
         public List<Product> GetByName(string name)
         {
-            var sql = "SELECT * FROM Products WHERE Name = @name";
+            var sql = "SELECT * FROM Products WHERE Name = @Name";
             using (var connections = _connectionFactory.GetConnection)
             {
                 connections.Open();
-                var result = connections.QuerySingleOrDefault(sql);
+                var result = connections.QuerySingleOrDefault(sql, new {Name = name});
                 return result;
             }
 
@@ -75,11 +75,11 @@ namespace CKK.DB.Repository
         //May need to update Update Later
         public int Update(Product entity)
         {
-            var sql = "UPDATE Products SET Name = @entity.Name, Price = @entity.Price, Quantity = @entity.Quantity WHERE Id = @entity.Id";
+            var sql = "UPDATE Products SET Name = @Entity.Name, Price = @Entity.Price, Quantity = @Entity.Quantity WHERE Id = @Entity.Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, entity);
+                var result = connection.Execute(sql, new { Entity = entity });
                 return result;
             }
         }
