@@ -89,7 +89,7 @@ namespace CKK.DB.Repository
             {
                 connection.Open();
                 var result = (int)connection.Execute(sql, new { Entity = entity });
-                return result;
+                return 1;
             }
         }
     }

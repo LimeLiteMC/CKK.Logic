@@ -31,14 +31,13 @@ namespace CKK.Online.Controllers
             string statusMessage = "";
             statusMessage = "Order Placed Successfully";
             var model = new CheckOutModel { statusMessage = statusMessage.Trim('\0') };
+            _passedUnit.ShoppingCarts.Ordered(orderId);
             return View("Checkout", model);
         }
         [HttpGet]
         [Route("Shop/ShoppingCart/Add/{productId}")]
         public IActionResult Add([FromRoute] int productId, [FromQuery] int quantity)
         {
-            var product = _passedUnit.Products.GetById(productId);
-            var test = _passedUnit.Orders.GetOrderByCustomerID(1);
             var order = _passedUnit.Orders.GetById(productId);
             _passedUnit.ShoppingCarts.AddToCart(order.ShoppingCartId, productId, quantity);
             var total = _passedUnit.ShoppingCarts.GetTotal(order.ShoppingCartId).ToString("c");
