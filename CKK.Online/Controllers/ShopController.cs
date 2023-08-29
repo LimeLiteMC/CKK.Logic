@@ -31,7 +31,8 @@ namespace CKK.Online.Controllers
             string statusMessage = "";
             statusMessage = "Order Placed Successfully";
             var model = new CheckOutModel { statusMessage = statusMessage.Trim('\0') };
-            _passedUnit.ShoppingCarts.Ordered(orderId);
+            _passedUnit.ShoppingCarts.ClearCart((_passedUnit.Orders.GetById(orderId)).ShoppingCartId);
+            _passedUnit.Orders.Delete(orderId);
             return View("Checkout", model);
         }
         [HttpGet]

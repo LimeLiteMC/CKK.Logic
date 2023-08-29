@@ -25,22 +25,8 @@
 
     $(".num-spinner").on("change", function (event) {
         ClickPlus(event.target.id.substring(8), event.target.value);
-        ClickMinus(event.target.id.substring(8), event.target.value);
         return false;
     });
-    //$(".num-spinner").on("change", function(event)){
-    //    ClickMinus(event.target.id.substring(8), event.target.value);
-    //    return false;
-    //}
-    function ClickMinus(productId, quantity){
-        $.get(
-            {
-            url: window.location.href + "/Subtract/" + productId + "?" + "quantity=" + quantity,
-            success: function(result){
-                $("#CheckoutBtn").text("Check Out - " - result);
-            }
-        });
-    }
     function ClickPlus(productId, quantity) {
         //console.log(productId + " item was clicked. The quantity is: " + quantity);
         $.get(
