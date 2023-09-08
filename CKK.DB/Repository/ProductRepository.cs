@@ -16,71 +16,67 @@ namespace CKK.DB.Repository
         {
             _connectionFactory = Conn;
         }
-        public int Add(Product entity)
+        public async Task Add(Product entity)
         {
             var sql = "Insert into Products (Price, Quantity, Name) VALUES (@Price, @Quantity, @Name)";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, new { Entity = entity });
-                return result;
+                await connection.ExecuteAsync(sql, new { Entity = entity });
+
             }
         }
 
-        public int Delete(int id)
+        public async Task Delete(int id)
         {
             var sql = "DELETE * FROM Products WHERE id = @Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, new {Id = id});
-                return result;
+                await connection.ExecuteAsync(sql, new {Id = id});
             }
         }
 
-        public List<Product> GetAll()
+        public async Task<IEnumerable<Product>> GetAll()
         {
             var sql = "SELECT * FROM Products";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Query<Product>(sql);
-                return result.ToList();
+                var result = await connection.QueryAsync<Product>(sql);
+                return result;
             }
         }
 
-        public Product GetById(int id)
+        public async Task<Product> GetById(int id)
         {
             var sql = "SELECT * FROM Products WHERE Id = @Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.QuerySingleOrDefault(sql, new {Id = id});
-                Product Result = result.FirstOrDefault();
-                return Result;
+                var result = await connection.QuerySingleOrDefaultAsync(sql, new {Id = id});
+                return result;
             }
         }
 
-        public List<Product> GetByName(string name)
+        public async Task GetByName(string name)
         {
             var sql = "SELECT * FROM Products WHERE Name = @Name";
             using (var connections = _connectionFactory.GetConnection)
             {
                 connections.Open();
-                var result = connections.QuerySingleOrDefault(sql, new {Name = name});
-                return result;
+                await connections.QuerySingleOrDefaultAsync(sql, new {Name = name});
             }
 
         }
         //May need to update Update Later
-        public int Update(Product entity)
+        public async Task Update(Product entity)
         {
             var sql = "UPDATE Products SET Name = @Entity.Name, Price = @Entity.Price, Quantity = @Entity.Quantity WHERE Id = @Entity.Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, new { Entity = entity });
-                return result;
+                await connection.ExecuteAsync(sql, new { Entity = entity });
             }
         }
     }

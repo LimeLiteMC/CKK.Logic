@@ -31,7 +31,7 @@ namespace CKK.Online.Controllers
             string statusMessage = "";
             statusMessage = "Order Placed Successfully";
             var model = new CheckOutModel { statusMessage = statusMessage.Trim('\0') };
-            _passedUnit.ShoppingCarts.ClearCart((_passedUnit.Orders.GetById(orderId)).ShoppingCartId);
+            _passedUnit.ShoppingCarts.ClearCart(_passedUnit.Orders.GetById(orderId).Result.ShoppingCartId);
             _passedUnit.Orders.Delete(orderId);
             return View("Checkout", model);
         }
@@ -39,9 +39,9 @@ namespace CKK.Online.Controllers
         [Route("Shop/ShoppingCart/Add/{productId}")]
         public IActionResult Add([FromRoute] int productId, [FromQuery] int quantity)
         {
-            var order = _passedUnit.Orders.GetById(productId);
-            _passedUnit.ShoppingCarts.AddToCart(order.ShoppingCartId, productId, quantity);
-            var total = _passedUnit.ShoppingCarts.GetTotal(order.ShoppingCartId).ToString("c");
+            var order = _passedUnit.Orders.GetById(1);
+            _passedUnit.ShoppingCarts.AddToCart(order.Result.ShoppingCartId, productId, quantity);
+            var total = _passedUnit.ShoppingCarts.GetTotal(order.Result.ShoppingCartId).ToString("c");
             return Ok(total);
         }
     }

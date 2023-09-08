@@ -98,10 +98,6 @@ namespace CKK.DB.Repository
                 var result = connections.Query<decimal>(sql, new {ShoppingCartId = ShoppingCartId});
                 foreach (var item in result)
                 {
-                    if (item == null)
-                    {
-                        return 1;
-                    }
                     return item;
                 }
                 return 1;
@@ -117,29 +113,28 @@ namespace CKK.DB.Repository
                 connections.QuerySingleOrDefault(sql, new { ShoppingCartId = shoppingCartId });
             }
         }
-        public int Update(ShoppingCartItem entity)
+        public async Task Update(ShoppingCartItem entity)
         {
             var sql = "UPDATE ShoppingCartItems SET ShoppingCartId = @Entity.ShoppingCartId, ProductId = @Entity.ProductId, Quantity = @Entity.Quantity WHERE Id = @Entity.Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Execute(sql, new { Entity = entity });
-                return 1;
+                await connection.ExecuteAsync(sql, new { Entity = entity });
             }
         }
 
-        public int Add(ShoppingCartItem entity)
+        public async Task Add(ShoppingCartItem entity)
         {
             var sqlCheck = "SELECT Quantity FROM Products WHERE Id = @entity.Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var test = connection.Query<int>(sqlCheck, entity);
+                var test = await connection.QueryAsync<int>(sqlCheck, entity);
                 foreach (var item in test)
                 {
                     if (item == entity.Quantity)
                     {
-                        return 1;
+                        continue;
                     }
                 }
             } 
@@ -150,7 +145,6 @@ namespace CKK.DB.Repository
                 connection.Open();
                 connection.Execute(sqlDelete, entity);
                 connection.Execute(sql, entity);
-                return 1;
             }
         }
     }

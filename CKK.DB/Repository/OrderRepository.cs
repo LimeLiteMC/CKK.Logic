@@ -17,57 +17,47 @@ namespace CKK.DB.Repository
         {
             _connectionFactory = Conn;
         }
-        public int Add(Order entity)
+        public async Task Add(Order entity)
         {
             var sql = "Insert into Orders (OrderNumber, CustomerId, ShoppingCartId, OrderId) VALUES (@OrderNumber, @CustomerId, @ShoppingCartId, @OrderId)";
             var sqlDelete = "DELETE FROM Orders WHERE OrderId = @OrderId";
-            using (var connection = _connectionFactory.GetConnection)
+            using ( var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                connection.Execute(sqlDelete, entity);
-                connection.Execute(sql, entity);
-                return 1;
+                await connection.ExecuteAsync(sqlDelete, entity);
+                await connection.ExecuteAsync(sql, entity);
             }
         }
 
-        public int Delete(int id)
+        public async Task Delete(int id)
         {
             var sql = "DELETE FROM Orders WHERE OrderId = @Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                connection.Execute(sql, new {Id = id});
-                return 1;
+                await connection.ExecuteAsync(sql, new {Id = id});
             }
         }
 
-        public List<Order> GetAll()
+        public async Task<IEnumerable<Order>> GetAll()
         {
             var sql = "SELECT * FROM Orders";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                List<Order> result = new List<Order>();
-                foreach (var i in connection.Query(sql))
-                {
-                    result.Add(i);
-                }
+                var result = await connection.QueryAsync<Order>(sql);
                 return result;
             }
         }
 
-        public Order GetById(int id)
+        public async Task<Order> GetById(int id)
         {
             var sql = "SELECT * FROM Orders WHERE OrderId = @Id";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = connection.Query<Order>(sql, new {Id = id});
-                foreach (var row in result)
-                {
-                    return row;
-                }
-                return null;
+                var result = await connection.QuerySingleOrDefaultAsync<Order>(sql, new {Id = id});
+                return result; 
             }
         }
 
@@ -82,14 +72,13 @@ namespace CKK.DB.Repository
             }
         }
 
-        public int Update(Order entity)
+        public async Task Update(Order entity)
         {
             var sql = "UPDATE Orders SET OrderNumber = @Entity.OrderNumber, CustomerId = @Entity.CustomerId, ShoppingCartId = @Entity.ShoppingCartId WHERE Id = @Entity.OrderId";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
-                var result = (int)connection.Execute(sql, new { Entity = entity });
-                return 1;
+                await connection.ExecuteAsync(sql, new { Entity = entity });
             }
         }
     }

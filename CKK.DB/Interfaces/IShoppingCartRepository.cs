@@ -16,7 +16,7 @@ namespace CKK.DB.Interfaces
         List<ShoppingCartItem> GetProducts(int shoppingCartId);
         void Ordered(int shoppingCartId);
 
-        int Update(ShoppingCartItem entity);
-        int Add(ShoppingCartItem entity);
+        Task Update(ShoppingCartItem entity);
+        Task Add(ShoppingCartItem entity);
     }
 }

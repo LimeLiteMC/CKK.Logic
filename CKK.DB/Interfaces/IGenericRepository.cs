@@ -10,10 +10,10 @@ namespace CKK.DB.Interfaces
 {
     public interface IGenericRepository<T>
     {
-        T GetById(int id);
-        List<T> GetAll();
-        int Add(T entity);
-        int Update(T entity);
-        int Delete(int id);
+        Task<T> GetById(int id);
+        Task<IEnumerable<T>> GetAll();
+        Task Add(T entity);
+        Task Update(T entity);
+        Task Delete(int id);
     }
 }
