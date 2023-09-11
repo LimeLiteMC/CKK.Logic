@@ -5,6 +5,7 @@
 <div class="text-center">
     <h1 class="display-4">Shopping Cart!</h1>
 </div>
+<div class="container">
 <form method="post">
     <input type="hidden" value="@Model.Order.OrderId" />
     <div class="row">
@@ -13,9 +14,11 @@
             <partial name="_ProductCard" model="item" />
         }
     </div>
+    <br>
     <a id="CheckoutBtn" asp-controller="Shop" asp-action="CheckOutCustomer" asp-route-OrderId="@Model.Order.OrderId" class="btn btn-success btn-lg btn-block">Check Out - $0.00</a>
     <p>This submit button will send your shopping cart to our server and add you to the queue.</p>
 </form>
+</div>
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

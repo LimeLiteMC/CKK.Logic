@@ -10,7 +10,7 @@ namespace CKK.Online.Models
         public Order Order { get; set; }
         public IUnitOfWork UOW { get; set; }
         public ShopModel(IUnitOfWork work)
-        {
+        { 
             Order = new Order();
             Order.OrderId = 1;
             Order.OrderNumber = "1";

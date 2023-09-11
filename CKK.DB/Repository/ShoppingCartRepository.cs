@@ -69,7 +69,7 @@ namespace CKK.DB.Repository
 
         public int ClearCart(int shoppingCartId)
         {
-            var sql = "DELETE FROM ShoppingCartItems WHERE Id = @ShoppingCartId";
+            var sql = "DELETE FROM ShoppingCartItems WHERE ShoppingCartId = @ShoppingCartId";
             using (var connection = _connectionFactory.GetConnection)
             {
                 connection.Open();
