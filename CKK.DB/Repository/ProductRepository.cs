@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CKK.DB.Interfaces;
 using CKK.Logic.Models;
@@ -69,7 +66,6 @@ namespace CKK.DB.Repository
             }
 
         }
-        //May need to update Update Later
         public async Task Update(Product entity)
         {
             var sql = "UPDATE Products SET Name = @Entity.Name, Price = @Entity.Price, Quantity = @Entity.Quantity WHERE Id = @Entity.Id";

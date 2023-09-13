@@ -5,20 +5,22 @@
 <div class="text-center">
     <h1 class="display-4">Shopping Cart!</h1>
 </div>
-<div class="container">
+<br>   
 <form method="post">
     <input type="hidden" value="@Model.Order.OrderId" />
+    <div class="container">
     <div class="row">
         @foreach (var item in Model.UOW.Products.GetAll().Result.ToList())
         {
-            <partial name="_ProductCard" model="item" />
+            <div class="col-sm-12 col-md-6 col-lg-4">
+            <partial name="_ProductCard" model="item" class="p-2"/>
+            </div>
         }
     </div>
+    </div>
     <br>
-    <a id="CheckoutBtn" asp-controller="Shop" asp-action="CheckOutCustomer" asp-route-OrderId="@Model.Order.OrderId" class="btn btn-success btn-lg btn-block">Check Out - $0.00</a>
-    <p>This submit button will send your shopping cart to our server and add you to the queue.</p>
+    <a id="CheckoutBtn" asp-controller="Shop" asp-action="CheckOutCustomer" asp-route-OrderId="@Model.Order.OrderId" class="btn btn-success btn-lg btn-block col-12">Check Out - $0.00</a>
 </form>
-</div>
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -31,7 +33,6 @@
         return false;
     });
     function ClickPlus(productId, quantity) {
-        //console.log(productId + " item was clicked. The quantity is: " + quantity);
         $.get(
             {
                 url: window.location.href + "/Add/" + productId + "?" + "quantity=" + quantity,

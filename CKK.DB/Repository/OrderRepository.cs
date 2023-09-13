@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CKK.DB.Interfaces;
-using CKK.Logic;
 using CKK.Logic.Models;
 using Dapper;
 
