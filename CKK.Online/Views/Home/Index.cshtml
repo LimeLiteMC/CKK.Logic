@@ -18,7 +18,6 @@
     });
 
     function ClickPlus(productId, quantity) {
-        //console.log(productId + " item was clicked. The quantity is: " + quantity);
         $.get(
             {
                 url: window.location.href + "/Add/" + productId + "?" + "quantity=" + quantity,
